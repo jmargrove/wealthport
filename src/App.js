@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "./presentational/Header.js";
 import styled from "styled-components";
+import Dictionaries from "./presentational/Dictionaries.js";
 import "./App.css";
 
 const Body = styled.div`
@@ -14,7 +15,9 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Body />
+        <Body>
+          <Dictionaries />
+        </Body>
       </div>
     );
   }
