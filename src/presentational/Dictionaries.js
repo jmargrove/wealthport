@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import DictionaryComponent from "../components/DictionaryComponent.js";
 
 const DictionaryContainer = styled.div`
   width: 300px;
@@ -18,7 +19,9 @@ class Dictionaries extends Component {
   render() {
     return (
       <DictionaryContainer>
-        <DictionaryList />
+        <DictionaryList>
+          <DictionaryComponent />
+        </DictionaryList>
       </DictionaryContainer>
     );
   }
