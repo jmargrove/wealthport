@@ -22,7 +22,24 @@ const defaultState = {
 };
 
 const reducer = (state = defaultState, action) => {
-  return state;
+  switch (action.type) {
+    case "ADD_NEW_DICTIONARY_NAME": {
+      return {
+        ...state,
+        dictionaries: [
+          ...state.dictionaries,
+          {
+            [action.name]: {
+              domain: [],
+              range: []
+            }
+          }
+        ]
+      };
+    }
+    default:
+      return state;
+  }
 };
 
 export default reducer;

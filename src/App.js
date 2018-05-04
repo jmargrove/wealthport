@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import Header from "./presentational/Header.js";
 import styled from "styled-components";
 import Dictionaries from "./presentational/Dictionaries.js";
+import Tables from "./presentational/Tables.js";
 import "./App.css";
 
 const Body = styled.div`
   width: 100vw;
   height: 750px;
   background-color: orange;
+  display: flex;
 `;
 
 class App extends Component {
@@ -17,6 +19,7 @@ class App extends Component {
         <Header />
         <Body>
           <Dictionaries />
+          <Tables />
         </Body>
       </div>
     );

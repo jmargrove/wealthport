@@ -10,9 +10,12 @@ const ItemContainer = styled.div`
   height: 75px;
   max-width: 260px;
   background-color: white;
+  border-width: thick;
+  border: solid;
+  border-color: black;
   cursor: grab;
   &:hover {
-    background-color: rgba(160, 234, 222, 0.95);
+    background-color: lightgrey;
   }
 `;
 
@@ -37,11 +40,11 @@ const DictionaryItems = props => {
   return props.dictionaries.map((el, i) => {
     return (
       <ItemContainer key={i}>
-        {el[Object.getOwnPropertyNames(el)[0]].domain.map(dom => {
-          return <DomRanText>{dom}</DomRanText>;
+        {el[Object.getOwnPropertyNames(el)[0]].domain.map((dom, i) => {
+          return <DomRanText key={i}>{dom}</DomRanText>;
         })}
-        {el[Object.getOwnPropertyNames(el)[0]].range.map(ran => {
-          return <DomRanText>{ran}</DomRanText>;
+        {el[Object.getOwnPropertyNames(el)[0]].range.map((ran, i) => {
+          return <DomRanText key={i}>{ran}</DomRanText>;
         })}
         <ItemName>{Object.getOwnPropertyNames(el)[0]} </ItemName>
       </ItemContainer>
