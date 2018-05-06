@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { changeViewItem } from "../actions.js";
 
 const ItemContainer = styled.div`
   display: flex;
@@ -10,9 +11,9 @@ const ItemContainer = styled.div`
   height: 75px;
   max-width: 260px;
   background-color: white;
-  border-width: thick;
+  border-width: thin;
   border: solid;
-  border-color: black;
+  border-color: grey;
   cursor: grab;
   &:hover {
     background-color: lightgrey;
@@ -36,17 +37,21 @@ const mapStateToProps = state => ({
   dictionaries: state.dictionaries
 });
 
+const mapDispatchToProps = dispatch => ({
+  changeViewItem: item => dispatch(changeViewItem(item))
+});
+
 const DictionaryItems = props => {
-  return props.dictionaries.map((el, i) => {
+  console.log("props", props);
+  const array = Object.getOwnPropertyNames(props.dictionaries);
+  return array.map((el, i) => {
     return (
-      <ItemContainer key={i}>
-        {el[Object.getOwnPropertyNames(el)[0]].domain.map((dom, i) => {
-          return <DomRanText key={i}>{dom}</DomRanText>;
-        })}
-        {el[Object.getOwnPropertyNames(el)[0]].range.map((ran, i) => {
-          return <DomRanText key={i}>{ran}</DomRanText>;
-        })}
-        <ItemName>{Object.getOwnPropertyNames(el)[0]} </ItemName>
+      <ItemContainer
+        ref={val => (this.ref = val)}
+        key={i}
+        onClick={() => props.changeView(el)}
+      >
+        <ItemName>{el}</ItemName>
       </ItemContainer>
     );
   });
@@ -54,9 +59,17 @@ const DictionaryItems = props => {
 
 class DictionaryComponent extends Component {
   render() {
+    console.log(this.props.dictionaries);
     const dictionaries = this.props.dictionaries;
-    return <DictionaryItems dictionaries={dictionaries} />;
+    return (
+      <DictionaryItems
+        changeView={this.props.changeViewItem}
+        dictionaries={dictionaries}
+      />
+    );
   }
 }
 
-export default connect(mapStateToProps, null)(DictionaryComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  DictionaryComponent
+);
