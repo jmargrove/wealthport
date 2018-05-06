@@ -8,7 +8,7 @@ import "./App.css";
 const Body = styled.div`
   width: 100vw;
   height: 750px;
-  background-color: orange;
+  background-color: purple;
   display: flex;
 `;
 
