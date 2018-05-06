@@ -6,7 +6,7 @@ import AddDictionaryComponent from "../components/AddDictionaryComponent.js";
 const DictionaryContainer = styled.div`
   width: 300px;
   height: 750px;
-  background-color: white;
+  background-color: blue;
   display: flex;
   flex-direction: column;
 `;
