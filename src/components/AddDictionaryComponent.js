@@ -67,11 +67,15 @@ class AddDictionaryComponent extends Component {
   };
 
   handleKeyPress = e => {
-    console.log("........../////", this.input.value);
-    if (e.key == "Enter") {
+    if (e.key === "Enter") {
       this.props.addNewDictionary(this.input.value);
       this.toggleAddDictionary();
     }
+  };
+
+  handleAddNewDictionary = () => {
+    this.props.addNewDictionary(this.input.value);
+    this.toggleAddDictionary();
   };
 
   render() {
@@ -85,22 +89,17 @@ class AddDictionaryComponent extends Component {
             placeholder="Add..."
           />
           <ClickBox>
-            <CloseIcon onClick={() => this.toggleAddDictionary()} />
+            <CloseIcon onClick={this.toggleAddDictionary} />
           </ClickBox>
           <ClickBox>
-            <CheckCircleOutlineIcon
-              onClick={i => {
-                this.props.addNewDictionary(this.input.value);
-                this.toggleAddDictionary();
-              }}
-            />
+            <CheckCircleOutlineIcon onClick={this.handleAddNewDictionary} />
           </ClickBox>
         </InputDictionaryContainer>
       );
     } else {
       return (
-        <AddDictionaryContainer onClick={() => this.toggleAddDictionary()}>
-          <div> New Dictionary </div>
+        <AddDictionaryContainer onClick={this.toggleAddDictionary}>
+          <div> New Dictionary? </div>
         </AddDictionaryContainer>
       );
     }

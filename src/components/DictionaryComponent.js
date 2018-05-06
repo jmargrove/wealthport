@@ -27,12 +27,6 @@ const ItemName = styled.div`
   font-weight: bold;
 `;
 
-const DomRanText = styled.p`
-  font-size: 10px;
-  color: lightgrey;
-  transform: rotate(-45deg);
-`;
-
 const mapStateToProps = state => ({
   dictionaries: state.dictionaries
 });
@@ -42,15 +36,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const DictionaryItems = props => {
-  console.log("props", props);
   const array = Object.getOwnPropertyNames(props.dictionaries);
   return array.map((el, i) => {
     return (
-      <ItemContainer
-        ref={val => (this.ref = val)}
-        key={i}
-        onClick={() => props.changeView(el)}
-      >
+      <ItemContainer key={i} onClick={() => props.changeViewItem(el)}>
         <ItemName>{el}</ItemName>
       </ItemContainer>
     );
@@ -59,11 +48,10 @@ const DictionaryItems = props => {
 
 class DictionaryComponent extends Component {
   render() {
-    console.log(this.props.dictionaries);
     const dictionaries = this.props.dictionaries;
     return (
       <DictionaryItems
-        changeView={this.props.changeViewItem}
+        changeViewItem={this.props.changeViewItem}
         dictionaries={dictionaries}
       />
     );

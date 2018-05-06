@@ -34,21 +34,7 @@ const reducer = (state = defaultState, action) => {
         }
       };
     }
-    case "ADD_NEW_DOMAIN_RANGE": {
-      return {
-        ...state,
-        dictionaries: {
-          ...state.dictionaries,
-          [action.dictionary]: [
-            ...state.dictionaries[action.dictionary],
-            { domain: action.domain, range: action.range }
-          ]
-        }
-      };
-    }
     case "CHANGE_VIEW_ITEM": {
-      console.log("action.......dksl", action.viewItem);
-
       return {
         ...state,
         viewItem: action.viewItem
@@ -64,6 +50,28 @@ const reducer = (state = defaultState, action) => {
               (el, i) => i !== action.content.rowNumber
             )
           ]
+        }
+      };
+    }
+    case "EDIT_ROW": {
+      const editedDR = [...state.dictionaries[action.content.dictionary]];
+      editedDR[action.content.i] = {
+        domain:
+          action.content.domain === ""
+            ? editedDR[action.content.i]
+              ? editedDR[action.content.i].domain
+              : ""
+            : action.content.domain,
+        range:
+          action.content.range === ""
+            ? editedDR[action.content.i] ? editedDR[action.content.i].range : ""
+            : action.content.range
+      };
+      return {
+        ...state,
+        dictionaries: {
+          ...state.dictionaries,
+          [action.content.dictionary]: [...editedDR]
         }
       };
     }
