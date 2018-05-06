@@ -20,7 +20,7 @@ const AddDictionaryContainer = styled.div`
   align-items: center;
   cursor: grab;
   &:hover {
-    background-color: white;
+    background-color: grey;
   }
 `;
 
@@ -29,7 +29,7 @@ const InputDictionaryContainer = styled.div`
   width: 240px;
   margin: 20px;
   margin-bottom: 0;
-  background-color: white;
+  background-color: lightgrey;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,7 +48,7 @@ const ClickBox = styled.div`
   align-items: center;
   margin-left: 5px;
   &:hover {
-    background-color: lightgrey;
+    background-color: white;
   }
 `;
 
@@ -67,7 +67,7 @@ class AddDictionaryComponent extends Component {
   };
 
   handleKeyPress = e => {
-    console.log(e);
+    console.log("........../////", this.input.value);
     if (e.key == "Enter") {
       this.props.addNewDictionary(this.input.value);
       this.toggleAddDictionary();
@@ -75,7 +75,6 @@ class AddDictionaryComponent extends Component {
   };
 
   render() {
-    console.log("the state", this.state);
     if (this.state.toggleAddDictionaryInput) {
       return (
         <InputDictionaryContainer>
