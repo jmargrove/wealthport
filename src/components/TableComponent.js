@@ -46,6 +46,7 @@ class TableComponent extends Component {
             </tr>
           </tbody>
           {emptyArray.map((el, i) => {
+            console.log("log", data[i] ? data[i].testResult : "");
             return (
               <TableElement
                 toggleDelete={this.handleDeletePopUp}
@@ -54,6 +55,7 @@ class TableComponent extends Component {
                 i={i}
                 domain={data[i] ? data[i].domain : ""}
                 range={data[i] ? data[i].range : ""}
+                testResult={data[i] ? data[i].testResult : ""}
               />
             );
           })}
@@ -63,7 +65,7 @@ class TableComponent extends Component {
             marginLeft: "2px",
             width: "492px",
             height: "80px",
-            backgroundColor: "purple",
+            backgroundColor: "white",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
