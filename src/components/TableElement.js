@@ -22,7 +22,8 @@ class TableElement extends Component {
       domain: "",
       range: "",
       i: 0,
-      dictionary: ""
+      dictionary: "",
+      testResult: ""
     };
   }
 
@@ -40,6 +41,7 @@ class TableElement extends Component {
       this.setState({
         domain: nextProps.domain,
         range: nextProps.range,
+        testResult: nextProps.testResult,
         i: nextProps.i,
         dictionary: nextProps.dictionary,
         toggleInput: false
@@ -61,6 +63,12 @@ class TableElement extends Component {
 
   handleEdit = () => {
     console.log("this is not working ////////");
+    this.props.editRow({
+      domain: this.inputDomain.value,
+      range: this.inputRange.value,
+      dictionary: this.state.dictionary,
+      i: this.state.i
+    });
     this.setState({ toggleInput: false });
   };
 
@@ -96,15 +104,23 @@ class TableElement extends Component {
     );
   };
 
+  whichErrorHasBeenThrown = error => {
+    if (error !== "") {
+      return "red";
+    }
+  };
+
   render() {
+    console.log("the state ...?", this.state.testResult);
     const elementDomain = this.state.domain;
     const elementRange = this.state.range;
-    const backColor = this.state.toggleInput ? "lightgrey" : "white";
+    const backColorEditing = this.state.toggleInput ? "#fgfgfg" : "white";
+    const backColorError = this.whichErrorHasBeenThrown(this.state.testResult);
     return (
       <tbody>
         <tr>
           <TableElementComtainer
-            style={{ backgroundColor: backColor }}
+            style={{ backgroundColor: backColorError }}
             onClick={() =>
               this.setState({
                 toggleInput: true,
@@ -118,7 +134,7 @@ class TableElement extends Component {
             )}
           </TableElementComtainer>
           <TableElementComtainer
-            style={{ backgroundColor: backColor }}
+            style={{ backgroundColor: backColorError }}
             onClick={() =>
               this.setState({
                 toggleInput: true,
@@ -143,9 +159,9 @@ export default connect(null, mapDispatchToProps)(TableElement);
 const TableElementComtainer = styled.td`
   height: 30px;
   background-color: white;
-  cursor: grab;
+  cursor: text;
   &:hover {
-    background-color: lightgrey;
+    background-color: grey;
   }
 `;
 
@@ -155,7 +171,7 @@ const InputContainer = styled.div`
   position: relative;
   width: 235px;
   height: 28px;
-  background-color: transparent;
+  background-color: red;
   margin-left: 10px;
 `;
 
@@ -168,7 +184,7 @@ const TableText = styled.p`
 const Box = styled.div`
   height: 20px;
   width: 20px;
-  background-color: transparent;
+  background-color: blue;
   margin-left: 25px;
   display: flex;
   align-items: center;
@@ -176,7 +192,8 @@ const Box = styled.div`
   border: solid;
   border-width: thin;
   border-radius: 2px;
+  cursor: grab;
   &:hover {
-    background-color: orange;
+    background-color: white;
   }
 `;
