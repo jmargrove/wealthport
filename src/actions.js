@@ -5,15 +5,6 @@ export const addNewDictionary = (name: string) => {
   };
 };
 
-// export const addDomRag = (obj: object) => {
-//   return {
-//     type: "ADD_NEW_DOMAIN_RANGE",
-//     domain: obj.domain,
-//     range: obj.range,
-//     dictionary: obj.dictionary
-//   };
-// };
-
 export const changeViewItem = viewItem => {
   return {
     type: "CHANGE_VIEW_ITEM",
@@ -33,5 +24,39 @@ export const EditRow = obj => {
   return {
     type: "EDIT_ROW",
     content: obj
+  };
+};
+
+//"Duplicate Rows", "Duplicate Domains", "Cycles", "Chain";
+
+export const testDuplicateRows = dic => {
+  console.log("action fired rows");
+  return {
+    type: "TEST_DUPLICATE_ROWS",
+    dictionary: dic
+  };
+};
+
+export const testDuplicateDomains = dic => {
+  console.log("action fired domains");
+  return {
+    type: "TEST_DUPLICATE_DOMAINS",
+    dictionary: dic
+  };
+};
+
+export const testCycles = dic => {
+  console.log("action fired cycles");
+  return {
+    type: "TEST_CYCLES",
+    dictionary: dic
+  };
+};
+
+export const testChain = dic => {
+  console.log("action fired chain");
+  return {
+    type: "TEST_CHAIN",
+    dictionary: dic
   };
 };
