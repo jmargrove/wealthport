@@ -4,23 +4,36 @@
   font-family: "Roboto", sans-serif;
 }
 
+.App {
+  width: 100vw;
+  height: 100vh;
+  background-color: transparent;
+}
+
+.MaxWidth {
+  max-width: 1120px;
+  margin: auto;
+  height: 100vh;
+}
+
 input {
   outline: none;
   border-color: white;
   border-width: 0;
-  height: 30px;
+  height: 20px;
   width: 150px;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .InputElement {
   position: relative;
   padding: 0;
   margin: 0;
-  width: 200px;
+  width: 170px;
   background-color: transparent;
   cursor: text;
   font-size: 15px;
+  font-weight: normal;
   display: block;
   height: 20px;
   display: block;
@@ -29,4 +42,8 @@ input {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+}
+
+::placeholder {
+  color: black;
 }

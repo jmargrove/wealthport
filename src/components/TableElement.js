@@ -5,10 +5,19 @@ import CheckCircleOutlineIcon from "mdi-react/CheckCircleOutlineIcon";
 import DeleteForeverIcon from "mdi-react/DeleteForeverIcon";
 import { EditRow } from "../actions.js";
 import { deleteRow } from "../actions.js";
+import { testDuplicateRows } from "../actions.js";
+import { testDuplicateDomains } from "../actions.js";
+import { testCycles } from "../actions.js";
+import { testChain } from "../actions.js";
 
 const mapDispatchToProps = dispatch => ({
   editRow: obj => dispatch(EditRow(obj)),
-  deleteRow: obj => dispatch(deleteRow(obj))
+  deleteRow: obj => dispatch(deleteRow(obj)),
+  testDuplicateRows: dictionary => dispatch(testDuplicateRows(dictionary)),
+  testDuplicateDomains: dictionary =>
+    dispatch(testDuplicateDomains(dictionary)),
+  testCycles: dictionary => dispatch(testCycles(dictionary)),
+  testChain: dictionary => dispatch(testChain(dictionary))
 });
 
 class TableElement extends Component {
@@ -22,7 +31,8 @@ class TableElement extends Component {
       domain: "",
       range: "",
       i: 0,
-      dictionary: ""
+      dictionary: "",
+      testResult: ""
     };
   }
 
@@ -40,6 +50,7 @@ class TableElement extends Component {
       this.setState({
         domain: nextProps.domain,
         range: nextProps.range,
+        testResult: nextProps.testResult,
         i: nextProps.i,
         dictionary: nextProps.dictionary,
         toggleInput: false
@@ -47,64 +58,141 @@ class TableElement extends Component {
     }
   }
 
-  handleKeyPress = e => {
+  handleReTestPostDelEdit = testType => {
+    switch (testType) {
+      case "duplicate row": {
+        this.props.testDuplicateRows(this.state.dictionary);
+        break;
+      }
+      case "duplicate domain": {
+        this.props.testDuplicateDomains(this.state.dictionary);
+        break;
+      }
+      case "Cycle": {
+        this.props.testCycles(this.state.dictionary);
+        break;
+      }
+      case "Chain": {
+        this.props.testChain(this.state.dictionary);
+        break;
+      }
+      default:
+        return null;
+    }
+  };
+
+  handleKeyPress = (e, testType) => {
     if (e.key === "Enter") {
+      this.props.editRow({
+        domain: this.inputDomain ? this.inputDomain.value : "",
+        range: this.inputRange ? this.inputRange.value : "",
+        dictionary: this.state.dictionary,
+        i: this.state.i
+      });
+      this.setState({
+        toggleInput: false,
+        focusLeft: false,
+        focusRight: false
+      });
+      this.handleReTestPostDelEdit(testType);
+    }
+  };
+
+  handleEdit = testType => {
+    if (this.inputDomain && this.inputRange) {
+      this.handleReTestPostDelEdit(testType);
       this.props.editRow({
         domain: this.inputDomain.value,
         range: this.inputRange.value,
         dictionary: this.state.dictionary,
         i: this.state.i
       });
-      this.setState({ toggleInput: false });
+      this.setState({
+        toggleInput: false,
+        focusLeft: false,
+        focusRight: false
+      });
     }
   };
 
-  handleEdit = () => {
-    console.log("this is not working ////////");
-    this.setState({ toggleInput: false });
+  handleDeleteRowAction = testType => {
+    this.props.deleteRow({
+      dictionary: this.state.dictionary,
+      rowNumber: this.state.i
+    });
+    this.handleReTestPostDelEdit(testType);
   };
 
-  toggleInput = (value, focus, input, editButton) => {
+  toggleInput = (
+    value,
+    focus,
+    input,
+    editButton,
+    backColorError,
+    backColorEditing
+  ) => {
     return !this.state.toggleInput ? (
       <TableText>{value}</TableText>
     ) : (
       <InputContainer>
         <input
+          style={{
+            backgroundColor: backColorError === "" ? "white" : backColorEditing
+          }}
           className="InputElement"
           ref={el => (this[input] = el)}
-          onKeyPress={this.handleKeyPress}
+          onKeyPress={e => this.handleKeyPress(e, this.state.testResult)}
+          onBlur={this.handleEdit}
           autoFocus={focus}
           placeholder={value}
         />
         {editButton ? (
           <Box
-            onClick={() =>
-              this.props.deleteRow({
-                dictionary: this.state.dictionary,
-                rowNumber: this.state.i
-              })}
+            style={{ marginRight: "5px" }}
+            onMouseDown={() =>
+              this.handleDeleteRowAction(this.state.testResult)}
           >
             <DeleteForeverIcon />
-          </Box>
-        ) : null}
-        {editButton ? (
-          <Box onClick={() => this.handleEdit()} style={{ marginLeft: "2px" }}>
-            <CheckCircleOutlineIcon />
           </Box>
         ) : null}
       </InputContainer>
     );
   };
 
+  whichErrorHasBeenThrown = error => {
+    if (error === "") {
+      return null;
+    } else if (error === "duplicate row" || error === "duplicate domain") {
+      return "#EC9A29";
+    } else {
+      return "#DF2935";
+    }
+  };
+
   render() {
+    console.log("this.state", this.state);
     const elementDomain = this.state.domain;
     const elementRange = this.state.range;
-    const backColor = this.state.toggleInput ? "lightgrey" : "white";
+    const backColorError = this.whichErrorHasBeenThrown(this.state.testResult);
+    const backColorEditing = this.state.toggleInput ? backColorError : null;
     return (
-      <tbody>
-        <tr>
+      <tbody
+        style={{
+          backgroundColor:
+            backColorError !== "" ? backColorError : backColorEditing
+        }}
+      >
+        <tr
+          style={{
+            backgroundColor:
+              backColorError !== "" ? backColorError : backColorEditing
+          }}
+        >
           <TableElementComtainer
-            style={{ backgroundColor: backColor }}
+            style={{
+              backgroundColor:
+                backColorError !== "" ? backColorError : backColorEditing
+            }}
             onClick={() =>
               this.setState({
                 toggleInput: true,
@@ -114,11 +202,17 @@ class TableElement extends Component {
             {this.toggleInput(
               elementDomain,
               this.state.focusLeft,
-              "inputDomain"
+              "inputDomain",
+              false,
+              backColorError,
+              backColorEditing
             )}
           </TableElementComtainer>
           <TableElementComtainer
-            style={{ backgroundColor: backColor }}
+            style={{
+              backgroundColor:
+                backColorError !== "" ? backColorError : backColorEditing
+            }}
             onClick={() =>
               this.setState({
                 toggleInput: true,
@@ -129,7 +223,9 @@ class TableElement extends Component {
               elementRange,
               this.state.focusRight,
               "inputRange",
-              true
+              true,
+              backColorError,
+              backColorEditing
             )}
           </TableElementComtainer>
         </tr>
@@ -143,9 +239,9 @@ export default connect(null, mapDispatchToProps)(TableElement);
 const TableElementComtainer = styled.td`
   height: 30px;
   background-color: white;
-  cursor: grab;
+  cursor: text;
   &:hover {
-    background-color: lightgrey;
+    background-color: #8bbf9f;
   }
 `;
 
@@ -155,7 +251,6 @@ const InputContainer = styled.div`
   position: relative;
   width: 235px;
   height: 28px;
-  background-color: transparent;
   margin-left: 10px;
 `;
 
@@ -168,7 +263,7 @@ const TableText = styled.p`
 const Box = styled.div`
   height: 20px;
   width: 20px;
-  background-color: transparent;
+  background-color: white;
   margin-left: 25px;
   display: flex;
   align-items: center;
@@ -176,7 +271,8 @@ const Box = styled.div`
   border: solid;
   border-width: thin;
   border-radius: 2px;
+  cursor: grab;
   &:hover {
-    background-color: orange;
+    background-color: #db5461;
   }
 `;

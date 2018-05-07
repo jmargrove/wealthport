@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import TableComponent from "./../components/TableComponent.js";
+import DictionaryNameComponent from "./../components/DictionaryNameComponent";
 
 const ViewContentContainer = styled.div`
-  width: 100%;
-  height: 750px;
-  background-color: red;
+  width: 540px;
+  height: 100%;
 `;
 
 const AddDictionaryContainer = styled.div`
@@ -13,21 +13,17 @@ const AddDictionaryContainer = styled.div`
   width: 500px;
   margin: 20px;
   margin-bottom: 0;
-  background-color: blue;
+  background-color: #5299d3;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: grab;
-  &:hover {
-    background-color: white;
-  }
 `;
 
 const TableContainer = styled.div`
   display: flex;
-  min-height: 600px;
   width: 500px;
-  background-color: orange;
+  background-color: white;
   margin: 20px;
 `;
 
@@ -35,7 +31,9 @@ class Tables extends Component {
   render() {
     return (
       <ViewContentContainer>
-        <AddDictionaryContainer />
+        <AddDictionaryContainer>
+          <DictionaryNameComponent />
+        </AddDictionaryContainer>
         <TableContainer>
           <TableComponent />
         </TableContainer>

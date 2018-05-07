@@ -4,28 +4,43 @@ import DictionaryComponent from "../components/DictionaryComponent.js";
 import AddDictionaryComponent from "../components/AddDictionaryComponent.js";
 
 const DictionaryContainer = styled.div`
-  width: 300px;
-  height: 750px;
-  background-color: blue;
+  width: 280px;
+  height: 100%;
+  background-color: transparent;
   display: flex;
   flex-direction: column;
 `;
 
 const DictionaryList = styled.div`
-  min-height: 600px;
+  height: 400px;
   width: 240px;
-  background-colorwhite;
+  background-color: white;
   margin: 20px;
+  border: solid;
+  border-width: thin;
+  overflow-y: auto;
+`;
+
+const DictionaryTitle = styled.div`
+  height: 60px;
+  width: 240px;
+  margin: 20px;
+  margin-bottom: 0;
+  background-color: #5299d3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 class Dictionaries extends Component {
   render() {
     return (
       <DictionaryContainer>
-        <AddDictionaryComponent />
+        <DictionaryTitle>Avalible Dictionaries </DictionaryTitle>
         <DictionaryList>
           <DictionaryComponent />
         </DictionaryList>
+        <AddDictionaryComponent />
       </DictionaryContainer>
     );
   }
