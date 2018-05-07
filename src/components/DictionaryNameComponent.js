@@ -6,11 +6,14 @@ const mapStateToProps = state => ({
   viewItem: state.viewItem
 });
 
-const ViewItem = styled.div`font-size: 25px;`;
+const ViewItem = styled.div`
+  font-size: 25px;
+  background-color: #5299d3;
+`;
 
 class DictionaryNameComponent extends Component {
   render() {
-    return <ViewItem>{this.props.viewItem}</ViewItem>;
+    return <ViewItem>{this.props.viewItem.toUpperCase()}</ViewItem>;
   }
 }
 

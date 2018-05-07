@@ -5,8 +5,7 @@ import DictionaryNameComponent from "./../components/DictionaryNameComponent";
 
 const ViewContentContainer = styled.div`
   width: 540px;
-  height: 750px;
-  background-color: purple;
+  height: 100%;
 `;
 
 const AddDictionaryContainer = styled.div`
@@ -14,19 +13,15 @@ const AddDictionaryContainer = styled.div`
   width: 500px;
   margin: 20px;
   margin-bottom: 0;
-  background-color: orange;
+  background-color: #5299d3;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: grab;
-  &:hover {
-    background-color: grey;
-  }
 `;
 
 const TableContainer = styled.div`
   display: flex;
-  min-height: 600px;
   width: 500px;
   background-color: white;
   margin: 20px;

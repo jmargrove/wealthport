@@ -5,9 +5,9 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: transparent;
   width: 100%;
-  height: 45px;
+  height: 60px;
   border-color: black;
   border-bottom: solid;
   border-width: thin;
@@ -22,7 +22,11 @@ class Header extends Component {
   render() {
     return (
       <HeaderContainer>
-        <HeaderTitle> wealthport </HeaderTitle>
+        <HeaderTitle> Wealthport </HeaderTitle>
+        <img
+          src={require("../logo/logo.svg")}
+          style={{ width: "70px", marginTop: "15px" }}
+        />
       </HeaderContainer>
     );
   }

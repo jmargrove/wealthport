@@ -1,4 +1,9 @@
 exports.testingDuplicateRows = array => {
+  array = array.map(el => {
+    el.testResult = "";
+    return el;
+  });
+
   let j = 1;
   function recur() {
     for (let i = 0; i < array.length; i++) {
@@ -7,10 +12,10 @@ exports.testingDuplicateRows = array => {
       }
 
       if (
+        array[i].domain !== "" &&
         array[i].domain === array[j].domain &&
         array[i].range === array[j].range
       ) {
-        console.log("i = ", i, "j = ", j);
         if (i === j) {
           return array;
         } else {
@@ -29,6 +34,11 @@ exports.testingDuplicateRows = array => {
 };
 
 exports.testingDuplicateDomains = array => {
+  array = array.map(el => {
+    el.testResult = "";
+    return el;
+  });
+
   let j = 1;
   function recur() {
     for (let i = 0; i < array.length; i++) {
@@ -36,8 +46,7 @@ exports.testingDuplicateDomains = array => {
         return array;
       }
 
-      if (array[i].domain === array[j].domain) {
-        console.log("i = ", i, "j = ", j);
+      if (array[i].domain !== "" && array[i].domain === array[j].domain) {
         if (i === j) {
           return array;
         } else {
@@ -65,6 +74,7 @@ exports.testingCycles = array => {
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length; j++) {
       if (
+        array[i].domain !== "" &&
         array[i].domain === array[j].range &&
         array[j].domain === array[i].range
       ) {
@@ -85,11 +95,39 @@ exports.testingChain = array => {
   // find the chains
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length; j++) {
-      if (array[i].domain === array[j].range) {
+      if (
+        array[i].domain !== "" &&
+        array[i].domain === array[j].range &&
+        array[j].domain !== array[i].range
+      ) {
         array[i].testResult = "Chain";
         array[j].testResult = "Chain";
       }
     }
   }
   return array;
+};
+
+exports.deleteErrorAuto = (array, testType) => {
+  let res = [];
+  if (testType === "Duplicate Rows") {
+    const histArray = [];
+    res = array.filter(el => {
+      if (
+        el.testResult === "" ||
+        histArray.indexOf(el.domain + el.range) === -1
+      ) {
+        histArray.push(el.domain + el.range);
+        return true;
+      } else {
+        return false;
+      }
+    });
+    return res.map(el => {
+      el.testResult = "";
+      return el;
+    });
+  } else {
+    return array;
+  }
 };

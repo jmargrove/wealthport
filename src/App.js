@@ -7,8 +7,6 @@ import Tests from "./presentational/Tests.js";
 import "./App.css";
 
 const Body = styled.div`
-  width: 100vw;
-  height: 750px;
   background-color: white;
   display: flex;
 `;
@@ -17,12 +15,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
-        <Body>
-          <Dictionaries />
-          <Tables />
-          <Tests />
-        </Body>
+        <body className="MaxWidth">
+          <Header />
+          <Body>
+            <Dictionaries />
+            <Tables />
+            <Tests />
+          </Body>
+          <div style={{ borderBottom: "solid", borderWidth: "thin" }} />
+        </body>
       </div>
     );
   }

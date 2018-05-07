@@ -5,22 +5,19 @@ import CheckCircleOutlineIcon from "mdi-react/CheckCircleOutlineIcon";
 import { connect } from "react-redux";
 import { addNewDictionary } from "../actions.js";
 
-const mapDispatchToProps = dispatch => ({
-  addNewDictionary: (name: string) => dispatch(addNewDictionary(name))
-});
-
 const AddDictionaryContainer = styled.div`
   height: 60px;
   width: 240px;
   margin: 20px;
   margin-bottom: 0;
+  margin-top: 0;
   background-color: lightgrey;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: grab;
   &:hover {
-    background-color: grey;
+    background-color: #8bbf9f;
   }
 `;
 
@@ -28,8 +25,9 @@ const InputDictionaryContainer = styled.div`
   height: 60px;
   width: 240px;
   margin: 20px;
+  margin-top: 0;
   margin-bottom: 0;
-  background-color: lightgrey;
+  background-color: #5299d3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,8 +35,8 @@ const InputDictionaryContainer = styled.div`
 `;
 
 const ClickBox = styled.div`
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   border: solid;
   border-color: black;
   border-width: thin;
@@ -48,9 +46,19 @@ const ClickBox = styled.div`
   align-items: center;
   margin-left: 5px;
   &:hover {
-    background-color: white;
+    background-color: #8bbf9f;
   }
 `;
+
+const DelBox = ClickBox.extend`
+  &:hover {
+    background-color: #db5461;
+  }
+`;
+
+const mapDispatchToProps = dispatch => ({
+  addNewDictionary: (name: string) => dispatch(addNewDictionary(name))
+});
 
 class AddDictionaryComponent extends Component {
   constructor(props) {
@@ -85,12 +93,13 @@ class AddDictionaryComponent extends Component {
           <input
             onKeyPress={this.handleKeyPress}
             autoFocus={true}
+            onBlur={() => this.setState({ toggleAddDictionaryInput: false })}
             ref={comp => (this.input = comp)}
             placeholder="Add..."
           />
-          <ClickBox>
+          <DelBox>
             <CloseIcon onClick={this.toggleAddDictionary} />
-          </ClickBox>
+          </DelBox>
           <ClickBox>
             <CheckCircleOutlineIcon onClick={this.handleAddNewDictionary} />
           </ClickBox>
@@ -99,7 +108,7 @@ class AddDictionaryComponent extends Component {
     } else {
       return (
         <AddDictionaryContainer onClick={this.toggleAddDictionary}>
-          <div> New Dictionary? </div>
+          <div> Add Dictionary </div>
         </AddDictionaryContainer>
       );
     }

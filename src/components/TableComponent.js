@@ -34,7 +34,7 @@ class TableComponent extends Component {
 
   render() {
     const data = this.props.data[this.props.viewItem];
-    const emptyArray = Array.apply(null, { length: 12 });
+    const emptyArray = Array.apply(null, { length: 14 });
 
     return (
       <TableBounds>
@@ -46,7 +46,6 @@ class TableComponent extends Component {
             </tr>
           </tbody>
           {emptyArray.map((el, i) => {
-            console.log("log", data[i] ? data[i].testResult : "");
             return (
               <TableElement
                 toggleDelete={this.handleDeletePopUp}
@@ -60,7 +59,7 @@ class TableComponent extends Component {
             );
           })}
         </table>
-        <div
+        {/* <div
           style={{
             marginLeft: "2px",
             width: "492px",
@@ -80,7 +79,7 @@ class TableComponent extends Component {
           <NavigateTable>
             <ArrowRightThick />
           </NavigateTable>
-        </div>
+        </div> */}
       </TableBounds>
     );
   }
@@ -90,7 +89,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(TableComponent);
 
 const TableBounds = styled.div`
   width: 500px;
-  height: 500px;
+  height: 482px;
   background-color: lightgrey;
   font-weight: bold;
 `;
