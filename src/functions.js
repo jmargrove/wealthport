@@ -1,11 +1,14 @@
 const errorHandler = array => {
-  return array
-    .map(el => {
-      if (el) {
-        el.testResult = "";
-        return el;
-      }
-    })
+  const resetArray = array.map(el => {
+    if (el) {
+      el.testResult = "";
+      return el;
+    } else {
+      return el;
+    }
+  });
+
+  return resetArray
     .filter(el => {
       return !!el;
     })
@@ -59,7 +62,6 @@ exports.testingCycles = arr => {
     for (let j = 0; j < array.length; j++) {
       if (
         array[i].domain !== "" &&
-        // i !== j &&
         array[i].domain === array[j].range &&
         array[j].domain === array[i].range
       ) {
