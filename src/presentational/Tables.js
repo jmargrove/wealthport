@@ -17,7 +17,10 @@ const AddDictionaryContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: grab;
+  border-bottom: solid;
+  border-top: solid;
+  border-width: thin;
+  border-color: black;
 `;
 
 const TableContainer = styled.div`

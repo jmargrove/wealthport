@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import ValidationComponents from "./../components/ValidationComponents.js";
+import ValidationComponent from "./../components/ValidationComponents.js";
 const TestsContainer = styled.div`width: 300px;`;
 
 const TestsHeader = styled.div`
@@ -12,12 +12,17 @@ const TestsHeader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: solid;
+  border-top: solid;
+  border-width: thin;
+  border-color: black;
 `;
 
 const TestsConsoleContainer = styled.div`
   width: 260px;
   height: 368px;
   margin: 20px;
+  background-color: grey;
   display: flex;
   align-content: center;
   flex-direction: column;
@@ -31,6 +36,7 @@ const ValidationHeaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 1px 1px 1px 0 grey;
 `;
 
 const ValidationTestsContainer = styled.div`
@@ -61,7 +67,7 @@ class Tests extends Component {
             <h3>V a l i d a t i o n</h3>
           </ValidationHeaderContainer>
           <ValidationTestsContainer>
-            <ValidationComponents />
+            <ValidationComponent />
           </ValidationTestsContainer>
           <FilterContainer />
         </TestsConsoleContainer>

@@ -1,4 +1,3 @@
-import React, { Component } from "react";
 import styled from "styled-components";
 
 export const ClickBox = styled.div`
@@ -16,16 +15,6 @@ export const ClickBox = styled.div`
   box-shadow: 0.5px 0.5px 2px 0 #427baa;
   &:hover {
     background-color: #8bbf9f;
-  }
-`;
-
-const Box = ClickBox.extend`
-  margin: 5px;
-  z-index: 99;
-  border: solid;
-  border-width: thin;
-  &:hover {
-    background-color: #db5461;
   }
 `;
 

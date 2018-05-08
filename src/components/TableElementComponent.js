@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import CheckCircleOutlineIcon from "mdi-react/CheckCircleOutlineIcon";
 import DeleteForeverIcon from "mdi-react/DeleteForeverIcon";
 import { editRow } from "../actions.js";
 import { deleteRow } from "../actions.js";

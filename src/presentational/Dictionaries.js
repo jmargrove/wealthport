@@ -30,6 +30,10 @@ const DictionaryTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: solid;
+  border-top: solid;
+  border-width: thin;
+  border-color: black;
 `;
 
 class Dictionaries extends Component {

@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "react-table/react-table.css";
 import styled from "styled-components";
-import ArrowRightThick from "mdi-react/ArrowRightThickIcon";
-import ArrowLeftThick from "mdi-react/ArrowLeftThickIcon";
 import TableElementComponent from "./TableElementComponent.js";
 import { deleteRow } from "../actions.js";
 
@@ -19,18 +17,6 @@ const TableHeader = styled.th`
   height: 30px;
   background-color: #ababab;
   box-shadow: 2px 2px 5px 0 grey;
-`;
-
-const NavigateTable = styled.div`
-  width: 120px;
-  height: 76px;
-  background-color: lightgrey;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &:hover {
-    background-color: white;
-  }
 `;
 
 const mapStateToProps = state => ({

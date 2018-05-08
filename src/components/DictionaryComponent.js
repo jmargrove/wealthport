@@ -73,7 +73,6 @@ class DictionaryComponent extends Component {
   };
 
   render() {
-    const dictionaries = this.props.dictionaries;
     return <div>{this.DictionaryItems()}</div>;
   }
 }

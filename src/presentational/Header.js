@@ -24,6 +24,7 @@ class Header extends Component {
       <HeaderContainer>
         <HeaderTitle> Wealthport </HeaderTitle>
         <img
+          alt="logo"
           src={require("../logo/logo.svg")}
           style={{ width: "70px", marginTop: "15px" }}
         />
