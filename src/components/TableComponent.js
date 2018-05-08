@@ -46,16 +46,9 @@ class TableComponent extends Component {
     super(props);
     this.state = {
       viewDictionary: null,
-      dataFrame: [{ domain: "", range: "" }],
       toggleDelete: false
     };
   }
-
-  handleDataChange = () => {
-    this.setState({
-      dataFrame: this.props.data[this.props.viewDictionary]
-    });
-  };
 
   render() {
     const data = this.props.data[this.props.viewDictionary];
