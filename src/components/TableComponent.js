@@ -4,7 +4,7 @@ import "react-table/react-table.css";
 import styled from "styled-components";
 import ArrowRightThick from "mdi-react/ArrowRightThickIcon";
 import ArrowLeftThick from "mdi-react/ArrowLeftThickIcon";
-import TableElement from "./TableElement.js";
+import TableElementComponent from "./TableElementComponent.js";
 import { deleteRow } from "../actions.js";
 
 const mapStateToProps = state => ({
@@ -47,7 +47,7 @@ class TableComponent extends Component {
           </tbody>
           {emptyArray.map((el, i) => {
             return (
-              <TableElement
+              <TableElementComponent
                 toggleDelete={this.handleDeletePopUp}
                 key={i}
                 dictionary={this.props.viewItem}
