@@ -80,7 +80,7 @@ exports.testingCycles = arr => {
     for (let j = 0; j < array.length; j++) {
       if (
         array[i].domain !== "" &&
-        i !== j &&
+        // i !== j &&
         array[i].domain === array[j].range &&
         array[j].domain === array[i].range
       ) {

@@ -58,7 +58,6 @@ class AddDictionaryComponent extends Component {
   };
 
   handleAddNewDictionary = () => {
-    console.log("this.input.value");
     this.props.addNewDictionary(this.input.value);
     this.toggleAddDictionary();
   };

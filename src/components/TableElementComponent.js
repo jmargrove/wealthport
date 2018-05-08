@@ -113,7 +113,7 @@ class TableElement extends Component {
         this.props.testDuplicateDomains(dispatchObj);
         break;
       }
-      case "Cycles": {
+      case "Cycle": {
         this.props.testCycles(dispatchObj);
         break;
       }
