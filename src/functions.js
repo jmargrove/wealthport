@@ -75,6 +75,7 @@ exports.testingCycles = array => {
     for (let j = 0; j < array.length; j++) {
       if (
         array[i].domain !== "" &&
+        i !== j &&
         array[i].domain === array[j].range &&
         array[j].domain === array[i].range
       ) {
@@ -97,6 +98,7 @@ exports.testingChain = array => {
     for (let j = 0; j < array.length; j++) {
       if (
         array[i].domain !== "" &&
+        i !== j &&
         array[i].domain === array[j].range &&
         array[j].domain !== array[i].range
       ) {
