@@ -1,11 +1,14 @@
 const errorHandler = array => {
-  return array
-    .map(el => {
-      if (el) {
-        el.testResult = "";
-        return el;
-      }
-    })
+  const resetArray = array.map(el => {
+    if (el) {
+      el.testResult = "";
+      return el;
+    } else {
+      return el;
+    }
+  });
+
+  return resetArray
     .filter(el => {
       return !!el;
     })
@@ -16,60 +19,39 @@ const errorHandler = array => {
 
 exports.testingDuplicateRows = arr => {
   const array = errorHandler(arr);
-  let j = 1;
-  function recur() {
-    for (let i = 0; i < array.length; i++) {
-      if (j > array.length - 1) {
-        return array;
-      }
-
+  for (let i = 0; i < array.length; i++) {
+    for (let j = 0; j < array.length; j++) {
       if (
+        array[i] &&
         array[i].domain !== "" &&
+        i !== j &&
         array[i].domain === array[j].domain &&
         array[i].range === array[j].range
       ) {
-        if (i === j) {
-          return array;
-        } else {
-          array[i].testResult = "duplicate row";
-          array[j].testResult = "duplicate row";
-          return array;
-        }
+        array[i].testResult = "duplicate row";
+        array[j].testResult = "duplicate row";
       }
-      j++;
-      recur();
-      j--;
     }
-    return array;
   }
-  return recur();
+  return array;
 };
 
 exports.testingDuplicateDomains = arr => {
   const array = errorHandler(arr);
-  let j = 1;
-  function recur() {
-    for (let i = 0; i < array.length; i++) {
-      if (j > array.length - 1) {
-        return array;
+  for (let i = 0; i < array.length; i++) {
+    for (let j = 0; j < array.length; j++) {
+      if (
+        array[i] &&
+        array[i].domain !== "" &&
+        i !== j &&
+        array[i].domain === array[j].domain
+      ) {
+        array[i].testResult = "duplicate domain";
+        array[j].testResult = "duplicate domain";
       }
-
-      if (array[i].domain !== "" && array[i].domain === array[j].domain) {
-        if (i === j) {
-          return array;
-        } else {
-          array[i].testResult = "duplicate domain";
-          array[j].testResult = "duplicate domain";
-          return array;
-        }
-      }
-      j++;
-      recur();
-      j--;
     }
-    return array;
   }
-  return recur();
+  return array;
 };
 
 exports.testingCycles = arr => {
@@ -80,7 +62,6 @@ exports.testingCycles = arr => {
     for (let j = 0; j < array.length; j++) {
       if (
         array[i].domain !== "" &&
-        // i !== j &&
         array[i].domain === array[j].range &&
         array[j].domain === array[i].range
       ) {
