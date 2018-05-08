@@ -1,4 +1,4 @@
-export const addNewDictionary = (name: string) => {
+export const addNewDictionary = name => {
   return {
     type: "ADD_NEW_DICTIONARY_NAME",
     name: name
@@ -12,10 +12,10 @@ export const deleteDictionary = name => {
   };
 };
 
-export const changeViewItem = viewItem => {
+export const changeViewDictionary = viewDictionary => {
   return {
     type: "CHANGE_VIEW_ITEM",
-    viewItem: viewItem
+    viewDictionary: viewDictionary
   };
 };
 
@@ -35,7 +35,6 @@ export const EditRow = obj => {
 };
 
 export const testDuplicateRows = dic => {
-  console.log("action fired rows", dic);
   return {
     type: "TEST_DUPLICATE_ROWS",
     dictionary: dic

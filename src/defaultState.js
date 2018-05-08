@@ -1,5 +1,5 @@
 export const defaultState = {
-  viewItem: "colors",
+  viewDictionary: "colors",
   dictionaries: {
     colors: [
       { domain: "Stonegrey", range: "Dark grey", testResult: "" },

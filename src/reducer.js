@@ -25,23 +25,22 @@ const reducer = (state = defaultState, action) => {
       };
     }
     case "DELETE_DICTIONARY": {
-      console.log("DELETE_DICTIONARY", action);
       delete state.dictionaries[action.name];
       return {
         ...state,
         dictionaries: {
           ...state.dictionaries
         },
-        viewItem:
-          action.name === state.viewItem
+        viewDictionary:
+          action.name === state.viewDictionary
             ? Object.getOwnPropertyNames(state.dictionaries)[0]
-            : state.viewItem
+            : state.viewDictionary
       };
     }
     case "CHANGE_VIEW_ITEM": {
       return {
         ...state,
-        viewItem: action.viewItem
+        viewDictionary: action.viewDictionary
       };
     }
     case "DELETE_ROW": {
@@ -98,7 +97,6 @@ const reducer = (state = defaultState, action) => {
     case "TEST_DUPLICATE_ROWS": {
       const testDuplicateRows = [...state.dictionaries[action.dictionary]];
       const testedDuplicateRows = testingDuplicateRows(testDuplicateRows);
-      console.log("test the duplicate rows", testedDuplicateRows);
       return {
         ...state,
         dictionaries: {

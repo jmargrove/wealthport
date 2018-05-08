@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { changeViewItem } from "../actions.js";
+import { changeViewDictionary } from "../actions.js";
 import { deleteDictionary } from "../actions.js";
 import DeleteForeverIcon from "mdi-react/DeleteForeverIcon";
 import { DelBox } from "./../presentational/Containers.js";
@@ -37,7 +37,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeViewItem: item => dispatch(changeViewItem(item)),
+  changeViewDictionary: item => dispatch(changeViewDictionary(item)),
   deleteDictionary: name => dispatch(deleteDictionary(name))
 });
 
@@ -57,7 +57,7 @@ class DictionaryComponent extends Component {
             </DelBox>
           </div>
           <div
-            onClick={() => this.props.changeViewItem(el)}
+            onClick={() => this.props.changeViewDictionary(el)}
             style={{
               flex: 6,
               display: "Flex",
