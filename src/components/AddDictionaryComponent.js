@@ -74,11 +74,11 @@ class AddDictionaryComponent extends Component {
             ref={comp => (this.input = comp)}
             placeholder="Add..."
           />
-          <DelBox>
-            <CloseIcon onClick={this.toggleAddDictionary} />
+          <DelBox onMouseDown={this.toggleAddDictionary}>
+            <CloseIcon />
           </DelBox>
-          <ClickBox>
-            <CheckCircleOutlineIcon onClick={this.handleAddNewDictionary} />
+          <ClickBox onMouseDown={this.handleAddNewDictionary}>
+            <CheckCircleOutlineIcon />
           </ClickBox>
         </InputDictionaryContainer>
       );
