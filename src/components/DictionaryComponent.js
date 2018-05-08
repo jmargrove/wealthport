@@ -4,24 +4,28 @@ import styled from "styled-components";
 import { changeViewItem } from "../actions.js";
 import { deleteDictionary } from "../actions.js";
 import DeleteForeverIcon from "mdi-react/DeleteForeverIcon";
+import { DelBox } from "./../presentational/Containers.js";
 
 const ItemContainer = styled.div`
+  padding-top: 5px;
   display: flex;
   margin: 20px;
   height: 75px;
   max-width: 260px;
-  background-color: lightgrey;
+  background-color: white;
   border: solid;
   border-color: black;
   border-radius: 3px;
-  cursor: grab;
+  cursor: pointer;
   border-width: thin;
+  box-shadow: 1px 1px 5px 0 grey;
   &:hover {
     background-color: #8bbf9f;
+    box-shadow: 2px 2px 10px 0 grey;
   }
 `;
 
-const ItemName = styled.div`
+const ItemName = styled.p`
   z-index: 99;
   font-size: 20px;
   font-weight: bold;
@@ -37,23 +41,6 @@ const mapDispatchToProps = dispatch => ({
   deleteDictionary: name => dispatch(deleteDictionary(name))
 });
 
-const Box = styled.div`
-  height: 20px;
-  width: 20px;
-  margin: 5px;
-  z-index: 99;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: solid;
-  border-width: thin;
-  border-radius: 2px;
-  cursor: grab;
-  &:hover {
-    background-color: #db5461;
-  }
-`;
-
 class DictionaryComponent extends Component {
   DictionaryItems = () => {
     const array = Object.getOwnPropertyNames(this.props.dictionaries);
@@ -65,9 +52,9 @@ class DictionaryComponent extends Component {
               flex: 1
             }}
           >
-            <Box onClick={() => this.props.deleteDictionary(el)}>
+            <DelBox onClick={() => this.props.deleteDictionary(el)}>
               <DeleteForeverIcon />
-            </Box>
+            </DelBox>
           </div>
           <div
             onClick={() => this.props.changeViewItem(el)}

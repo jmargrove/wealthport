@@ -6,7 +6,7 @@ const mapStateToProps = state => ({
   viewItem: state.viewItem
 });
 
-const ViewItem = styled.div`
+const ViewItem = styled.p`
   font-size: 25px;
   background-color: #5299d3;
 `;

@@ -19,6 +19,16 @@ export const ClickBox = styled.div`
   }
 `;
 
+const Box = ClickBox.extend`
+  margin: 5px;
+  z-index: 99;
+  border: solid;
+  border-width: thin;
+  &:hover {
+    background-color: #db5461;
+  }
+`;
+
 export const DelBox = ClickBox.extend`
   &:hover {
     background-color: #db5461;
