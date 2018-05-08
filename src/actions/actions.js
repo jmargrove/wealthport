@@ -1,10 +1,10 @@
 import * as types from "./types";
 
 export const addNewDictionary = name => {
-  ({
+  return {
     type: types.ADD_NEW_DICTIONARY_NAME,
     name: name
-  });
+  };
 };
 
 export const deleteDictionary = name => {
