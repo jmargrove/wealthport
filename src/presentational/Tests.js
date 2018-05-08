@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import ValidationComponent from "./../components/ValidationComponents.js";
-const TestsContainer = styled.div`width: 300px;`;
 
 const TestsHeader = styled.div`
   height: 60px;
@@ -20,7 +19,7 @@ const TestsHeader = styled.div`
 
 const TestsConsoleContainer = styled.div`
   width: 260px;
-  height: 368px;
+  height: 268px;
   margin: 20px;
   background-color: grey;
   display: flex;
@@ -47,18 +46,10 @@ const ValidationTestsContainer = styled.div`
   background-color: lightgrey;
 `;
 
-const FilterContainer = styled.div`
-  width: 256px;
-  height: 162px;
-  margin: 2px;
-  margin-top: 0;
-  background-color: white;
-`;
-
 class Tests extends Component {
   render() {
     return (
-      <TestsContainer>
+      <div style={{ width: "300px" }}>
         <TestsHeader>
           <div> Tests Console</div>
         </TestsHeader>
@@ -69,9 +60,8 @@ class Tests extends Component {
           <ValidationTestsContainer>
             <ValidationComponent />
           </ValidationTestsContainer>
-          <FilterContainer />
         </TestsConsoleContainer>
-      </TestsContainer>
+      </div>
     );
   }
 }

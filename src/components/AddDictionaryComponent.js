@@ -51,6 +51,7 @@ class AddDictionaryComponent extends Component {
   };
 
   handleKeyPress = e => {
+    console.log(e.keyCode);
     if (e.key === "Enter") {
       this.props.addNewDictionary(this.input.value);
       this.toggleAddDictionary();
