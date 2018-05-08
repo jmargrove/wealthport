@@ -18,6 +18,7 @@ const TableHeader = styled.th`
   width: 250px;
   height: 30px;
   background-color: #ababab;
+  box-shadow: 2px 2px 5px 0 grey;
 `;
 
 const NavigateTable = styled.div`

@@ -26,8 +26,7 @@ export const deleteRow = obj => {
   };
 };
 
-export const EditRow = obj => {
-  console.log("actions", obj);
+export const editRow = obj => {
   return {
     type: "EDIT_ROW",
     content: obj

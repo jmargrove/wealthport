@@ -23,7 +23,7 @@ export const defaultState = {
       { domain: "Middle Sized", range: "Medium", testResult: "" },
       { domain: "Middle Sized", range: "Medium", testResult: "" },
       { domain: "colossal", range: "Large", testResult: "" },
-      { domain: "Large", range: "colossal", testResult: "" },
+      { domain: "Large", range: "Colossal", testResult: "" },
       { domain: "Middle Sized", range: "Medium", testResult: "" },
       { domain: "Mini", range: "Very Small", testResult: "" },
       { domain: "Pint-Sized", range: "Small", testResult: "" },
