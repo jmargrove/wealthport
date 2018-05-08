@@ -3,6 +3,10 @@ https://t03jam8.github.io/wealthport/
 <p> Dictionary management application <p> 
 
 
+<p align="center">
+<img align="right" src="https://thumbs.gfycat.com/BrokenEthicalBrahmanbull-size_restricted.gif" height="400px">
+</p>
+
 
 
 <h2> Getting started </h2> 
