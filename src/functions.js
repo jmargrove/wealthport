@@ -131,3 +131,20 @@ exports.deleteErrorAuto = (array, testType) => {
     return array;
   }
 };
+
+exports.runningTests = (state, action, fun) => {
+  const testArray = [...state.dictionaries[action.dictionary]];
+  const testedArray = fun(testArray);
+  const bool = testedArray.filter(el => {
+    return el.testResult !== "";
+  })[0];
+
+  return {
+    ...state,
+    testType: !bool ? "" : action.test,
+    dictionaries: {
+      ...state.dictionaries,
+      [action.dictionary]: [...testedArray]
+    }
+  };
+};

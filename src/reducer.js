@@ -3,7 +3,8 @@ import {
   testingDuplicateDomains,
   testingCycles,
   testingChain,
-  deleteErrorAuto
+  deleteErrorAuto,
+  runningTests
 } from "./functions";
 import { defaultState } from "./defaultState.js";
 
@@ -83,66 +84,16 @@ const reducer = (state = defaultState, action) => {
       };
     }
     case "TEST_DUPLICATE_DOMAINS": {
-      const testDuplicateDomains = [...state.dictionaries[action.dictionary]];
-      const testedDuplicateDomains = testingDuplicateDomains(
-        testDuplicateDomains
-      );
-      const bool = testedDuplicateDomains.filter(el => {
-        return el.testResult !== "";
-      })[0];
-      return {
-        ...state,
-        testType: !bool ? "" : action.test,
-        dictionaries: {
-          ...state.dictionaries,
-          [action.dictionary]: [...testedDuplicateDomains]
-        }
-      };
+      return runningTests(state, action, testingDuplicateDomains);
     }
     case "TEST_DUPLICATE_ROWS": {
-      const testDuplicateRows = [...state.dictionaries[action.dictionary]];
-      const testedDuplicateRows = testingDuplicateRows(testDuplicateRows);
-      const bool = testedDuplicateRows.filter(el => {
-        return el.testResult !== "";
-      })[0];
-      return {
-        ...state,
-        testType: !bool ? "" : action.test,
-        dictionaries: {
-          ...state.dictionaries,
-          [action.dictionary]: [...testedDuplicateRows]
-        }
-      };
+      return runningTests(state, action, testingDuplicateRows);
     }
     case "TEST_CYCLES": {
-      const testCycles = [...state.dictionaries[action.dictionary]];
-      const testedCycles = testingCycles(testCycles);
-      const bool = testedCycles.filter(el => {
-        return el.testResult !== "";
-      })[0];
-      return {
-        ...state,
-        testType: !bool ? "" : action.test,
-        dictionaries: {
-          ...state.dictionaries,
-          [action.dictionary]: [...testedCycles]
-        }
-      };
+      return runningTests(state, action, testingCycles);
     }
     case "TEST_CHAIN": {
-      const testChain = [...state.dictionaries[action.dictionary]];
-      const testedChains = testingChain(testChain);
-      const bool = testedChains.filter(el => {
-        return el.testResult !== "";
-      })[0];
-      return {
-        ...state,
-        testType: !bool ? "" : action.test,
-        dictionaries: {
-          ...state.dictionaries,
-          [action.dictionary]: [...testedChains]
-        }
-      };
+      return runningTests(state, action, testingChain);
     }
     case "DELETE_ERROR_AUTO": {
       const dictionaryContents = [...state.dictionaries[action.dictionary]];

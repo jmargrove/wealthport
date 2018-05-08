@@ -105,6 +105,7 @@ class ValidationComponent extends Component {
       "Chain"
     ];
     const testType = this.props.testType;
+    console.log("validation test type", this.props);
     const backColor = this.whichColorForTest(testType);
     return testTypeArray.map((el, i) => {
       return (
