@@ -6,10 +6,7 @@ const mapStateToProps = state => ({
   viewDictionary: state.viewDictionary
 });
 
-const ViewDictionary = styled.p`
-  font-size: 25px;
-  background-color: #5299d3;
-`;
+const ViewDictionary = styled.p`font-size: 25px;`;
 
 class DictionaryNameComponent extends Component {
   render() {
