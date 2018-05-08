@@ -13,16 +13,16 @@ import { deleteErrorAuto } from "../actions.js";
 import { ClickBox, DelBox } from "./../presentational/Containers.js";
 
 const mapDispatchToProps = dispatch => ({
-  testDuplicateRows: dictionary => dispatch(testDuplicateRows(dictionary)),
-  testDuplicateDomains: dictionary =>
-    dispatch(testDuplicateDomains(dictionary)),
-  testCycles: dictionary => dispatch(testCycles(dictionary)),
-  testChain: dictionary => dispatch(testChain(dictionary)),
+  testDuplicateRows: testObj => dispatch(testDuplicateRows(testObj)),
+  testDuplicateDomains: testObj => dispatch(testDuplicateDomains(testObj)),
+  testCycles: testObj => dispatch(testCycles(testObj)),
+  testChain: testObj => dispatch(testChain(testObj)),
   deleteErrorAuto: obj => dispatch(deleteErrorAuto(obj))
 });
 
 const mapStateToProps = state => ({
-  dictionary: state.viewDictionary
+  dictionary: state.viewDictionary,
+  testType: state.testType
 });
 
 const TestContainer = styled.div`
@@ -61,25 +61,39 @@ class ValidationComponent extends Component {
   };
 
   whichTestToDispatch = (whichTestDispatch, dictionary) => {
+    const dispatchObj = { dictionary: dictionary, test: whichTestDispatch };
     switch (whichTestDispatch) {
       case "Duplicate Rows": {
-        this.props.testDuplicateRows(dictionary);
+        this.props.testDuplicateRows(dispatchObj);
         break;
       }
       case "Duplicate Domains": {
-        this.props.testDuplicateDomains(dictionary);
+        this.props.testDuplicateDomains(dispatchObj);
         break;
       }
       case "Cycles": {
-        this.props.testCycles(dictionary);
+        this.props.testCycles(dispatchObj);
         break;
       }
       case "Chain": {
-        this.props.testChain(dictionary);
+        this.props.testChain(dispatchObj);
         break;
       }
       default:
         return null;
+    }
+  };
+
+  whichColorForTest = testType => {
+    if (testType === "") {
+      return null;
+    } else if (
+      testType === "Duplicate Rows" ||
+      testType === "Duplicate Domains"
+    ) {
+      return "#EC9A29";
+    } else if (testType === "Cycles" || testType === "Chain") {
+      return "#DF2935";
     }
   };
 
@@ -90,9 +104,16 @@ class ValidationComponent extends Component {
       "Cycles",
       "Chain"
     ];
+    const testType = this.props.testType;
+    const backColor = this.whichColorForTest(testType);
     return testTypeArray.map((el, i) => {
       return (
-        <TestContainer key={i + el}>
+        <TestContainer
+          key={i + el}
+          style={{
+            backgroundColor: testType === el ? backColor : "white"
+          }}
+        >
           <p style={{ marginLeft: "5px" }}>{el}</p>
           <div
             style={{

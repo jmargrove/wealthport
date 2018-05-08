@@ -33,31 +33,35 @@ export const editRow = obj => {
   };
 };
 
-export const testDuplicateRows = dic => {
+export const testDuplicateRows = obj => {
   return {
     type: "TEST_DUPLICATE_ROWS",
-    dictionary: dic
+    dictionary: obj.dictionary,
+    test: obj.test
   };
 };
 
-export const testDuplicateDomains = dic => {
+export const testDuplicateDomains = obj => {
   return {
     type: "TEST_DUPLICATE_DOMAINS",
-    dictionary: dic
+    dictionary: obj.dictionary,
+    test: obj.test
   };
 };
 
-export const testCycles = dic => {
+export const testCycles = obj => {
   return {
     type: "TEST_CYCLES",
-    dictionary: dic
+    dictionary: obj.dictionary,
+    test: obj.test
   };
 };
 
-export const testChain = dic => {
+export const testChain = obj => {
   return {
     type: "TEST_CHAIN",
-    dictionary: dic
+    dictionary: obj.dictionary,
+    test: obj.test
   };
 };
 

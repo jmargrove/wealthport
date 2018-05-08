@@ -40,6 +40,7 @@ const reducer = (state = defaultState, action) => {
     case "CHANGE_VIEW_ITEM": {
       return {
         ...state,
+        testType: "",
         viewDictionary: action.viewDictionary
       };
     }
@@ -86,8 +87,12 @@ const reducer = (state = defaultState, action) => {
       const testedDuplicateDomains = testingDuplicateDomains(
         testDuplicateDomains
       );
+      const bool = testedDuplicateDomains.filter(el => {
+        return el.testResult !== "";
+      })[0];
       return {
         ...state,
+        testType: !bool ? "" : action.test,
         dictionaries: {
           ...state.dictionaries,
           [action.dictionary]: [...testedDuplicateDomains]
@@ -97,8 +102,12 @@ const reducer = (state = defaultState, action) => {
     case "TEST_DUPLICATE_ROWS": {
       const testDuplicateRows = [...state.dictionaries[action.dictionary]];
       const testedDuplicateRows = testingDuplicateRows(testDuplicateRows);
+      const bool = testedDuplicateRows.filter(el => {
+        return el.testResult !== "";
+      })[0];
       return {
         ...state,
+        testType: !bool ? "" : action.test,
         dictionaries: {
           ...state.dictionaries,
           [action.dictionary]: [...testedDuplicateRows]
@@ -106,24 +115,32 @@ const reducer = (state = defaultState, action) => {
       };
     }
     case "TEST_CYCLES": {
-      const testDuplicateRows = [...state.dictionaries[action.dictionary]];
-      const testedDuplicateRows = testingCycles(testDuplicateRows);
+      const testCycles = [...state.dictionaries[action.dictionary]];
+      const testedCycles = testingCycles(testCycles);
+      const bool = testedCycles.filter(el => {
+        return el.testResult !== "";
+      })[0];
       return {
         ...state,
+        testType: !bool ? "" : action.test,
         dictionaries: {
           ...state.dictionaries,
-          [action.dictionary]: [...testedDuplicateRows]
+          [action.dictionary]: [...testedCycles]
         }
       };
     }
     case "TEST_CHAIN": {
-      const testDuplicateRows = [...state.dictionaries[action.dictionary]];
-      const testedDuplicateRows = testingChain(testDuplicateRows);
+      const testChain = [...state.dictionaries[action.dictionary]];
+      const testedChains = testingChain(testChain);
+      const bool = testedChains.filter(el => {
+        return el.testResult !== "";
+      })[0];
       return {
         ...state,
+        testType: !bool ? "" : action.test,
         dictionaries: {
           ...state.dictionaries,
-          [action.dictionary]: [...testedDuplicateRows]
+          [action.dictionary]: [...testedChains]
         }
       };
     }
@@ -135,6 +152,7 @@ const reducer = (state = defaultState, action) => {
       );
       return {
         ...state,
+        testType: "",
         dictionaries: {
           ...state.dictionaries,
           [action.dictionary]: [...CleaneDictionaryContents]

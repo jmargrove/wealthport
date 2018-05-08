@@ -46,11 +46,10 @@ const TableText = styled.p`
 const mapDispatchToProps = dispatch => ({
   editRow: obj => dispatch(editRow(obj)),
   deleteRow: obj => dispatch(deleteRow(obj)),
-  testDuplicateRows: dictionary => dispatch(testDuplicateRows(dictionary)),
-  testDuplicateDomains: dictionary =>
-    dispatch(testDuplicateDomains(dictionary)),
-  testCycles: dictionary => dispatch(testCycles(dictionary)),
-  testChain: dictionary => dispatch(testChain(dictionary))
+  testDuplicateRows: testObj => dispatch(testDuplicateRows(testObj)),
+  testDuplicateDomains: testObj => dispatch(testDuplicateDomains(testObj)),
+  testCycles: testObj => dispatch(testCycles(testObj)),
+  testChain: testObj => dispatch(testChain(testObj))
 });
 
 class TableElement extends Component {
@@ -103,22 +102,23 @@ class TableElement extends Component {
     }
   };
 
-  handleReTestPostDelEdit = testType => {
-    switch (testType) {
+  whichTestToDispatch = (whichTestDispatch, dictionary) => {
+    const dispatchObj = { dictionary: dictionary, test: whichTestDispatch };
+    switch (whichTestDispatch) {
       case "duplicate row": {
-        this.props.testDuplicateRows(this.state.dictionary);
+        this.props.testDuplicateRows(dispatchObj);
         break;
       }
       case "duplicate domain": {
-        this.props.testDuplicateDomains(this.state.dictionary);
+        this.props.testDuplicateDomains(dispatchObj);
         break;
       }
-      case "Cycle": {
-        this.props.testCycles(this.state.dictionary);
+      case "Cycles": {
+        this.props.testCycles(dispatchObj);
         break;
       }
       case "Chain": {
-        this.props.testChain(this.state.dictionary);
+        this.props.testChain(dispatchObj);
         break;
       }
       default:
@@ -139,13 +139,13 @@ class TableElement extends Component {
         focusLeft: false,
         focusRight: false
       });
-      this.handleReTestPostDelEdit(testType);
+      this.whichTestToDispatch(testType, this.state.dictionary);
     }
   };
 
   handleEdit = testType => {
     if (this.inputDomain && this.inputRange) {
-      this.handleReTestPostDelEdit(testType);
+      this.whichTestToDispatch(testType, this.state.dictionary);
       this.props.editRow({
         domain: this.inputDomain.value,
         range: this.inputRange.value,
@@ -165,7 +165,7 @@ class TableElement extends Component {
       dictionary: this.state.dictionary,
       rowNumber: this.state.i
     });
-    this.handleReTestPostDelEdit(testType);
+    this.whichTestToDispatch(testType, this.state.dictionary);
   };
 
   toggleInput = (
