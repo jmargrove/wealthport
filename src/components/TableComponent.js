@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import "react-table/react-table.css";
 import styled from "styled-components";
 import TableElementComponent from "./TableElementComponent.js";
-import { deleteRow } from "../actions.js";
+import { deleteRow } from "./../actions/actions.js";
 
 const TableBounds = styled.div`
   width: 500px;

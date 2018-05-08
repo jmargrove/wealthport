@@ -3,7 +3,7 @@ import styled from "styled-components";
 import CloseIcon from "mdi-react/CloseIcon";
 import CheckCircleOutlineIcon from "mdi-react/CheckCircleOutlineIcon";
 import { connect } from "react-redux";
-import { addNewDictionary } from "../actions.js";
+import { addNewDictionary } from "./../actions/actions.js";
 import { DelBox, ClickBox } from "./../presentational/Containers.js";
 
 const AddDictionaryContainer = styled.div`

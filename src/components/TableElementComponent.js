@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import DeleteForeverIcon from "mdi-react/DeleteForeverIcon";
-import { editRow } from "../actions.js";
-import { deleteRow } from "../actions.js";
-import { testDuplicateRows } from "../actions.js";
-import { testDuplicateDomains } from "../actions.js";
-import { testCycles } from "../actions.js";
-import { testChain } from "../actions.js";
+import { editRow } from "./../actions/actions.js";
+import { deleteRow } from "./../actions/actions.js";
+import { testDuplicateRows } from "./../actions/actions.js";
+import { testDuplicateDomains } from "./../actions/actions.js";
+import { testCycles } from "./../actions/actions.js";
+import { testChain } from "./../actions/actions.js";
 import { ClickBox } from "./../presentational/Containers.js";
 
 const DelBox = ClickBox.extend`

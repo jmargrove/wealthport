@@ -13,6 +13,7 @@ const reducer = (state = defaultState, action) => {
     case "ADD_NEW_DICTIONARY_NAME": {
       return {
         ...state,
+        viewDictionary: action.name,
         dictionaries: {
           ...state.dictionaries,
           [action.name]: [

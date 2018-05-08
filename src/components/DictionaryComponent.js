@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { changeViewDictionary } from "../actions.js";
-import { deleteDictionary } from "../actions.js";
+import { changeViewDictionary } from "./../actions/actions.js";
+import { deleteDictionary } from "./../actions/actions.js";
 import DeleteForeverIcon from "mdi-react/DeleteForeverIcon";
 import { DelBox } from "./../presentational/Containers.js";
 
@@ -45,7 +45,7 @@ const mapDispatchToProps = dispatch => ({
 class DictionaryComponent extends Component {
   DictionaryItems = () => {
     const array = Object.getOwnPropertyNames(this.props.dictionaries);
-    return array.map((el, i) => {
+    return array.reverse().map((el, i) => {
       return (
         <ItemContainer
           key={i}

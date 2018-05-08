@@ -1,5 +1,5 @@
 export const defaultState = {
-  viewDictionary: "colors",
+  viewDictionary: "temperature",
   testType: "",
   dictionaries: {
     colors: [

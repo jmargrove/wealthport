@@ -4,12 +4,12 @@ import ContentDuplicateIcon from "mdi-react/ContentDuplicateIcon";
 import SyncIcon from "mdi-react/SyncIcon";
 import AtomIcon from "mdi-react/AtomIcon";
 import { connect } from "react-redux";
-import { testDuplicateRows } from "./../actions.js";
-import { testDuplicateDomains } from "./../actions.js";
-import { testCycles } from "./../actions.js";
-import { testChain } from "./../actions.js";
+import { testDuplicateRows } from "./../actions/actions.js";
+import { testDuplicateDomains } from "./../actions/actions.js";
+import { testCycles } from "./../actions/actions.js";
+import { testChain } from "./../actions/actions.js";
 import DeleteForeverIcon from "mdi-react/DeleteForeverIcon";
-import { deleteErrorAuto } from "../actions.js";
+import { deleteErrorAuto } from "./../actions/actions.js";
 import { ClickBox, DelBox } from "./../presentational/Containers.js";
 
 const mapDispatchToProps = dispatch => ({
@@ -41,6 +41,7 @@ const TestContainer = styled.div`
 `;
 
 class ValidationComponent extends Component {
+  // select the correct icon to display for each test
   iconSelection = whichTest => {
     switch (whichTest) {
       case "Duplicate Rows": {
@@ -60,6 +61,7 @@ class ValidationComponent extends Component {
     }
   };
 
+  // dispatching the correct test
   whichTestToDispatch = (whichTestDispatch, dictionary) => {
     const dispatchObj = { dictionary: dictionary, test: whichTestDispatch };
     switch (whichTestDispatch) {
@@ -84,6 +86,7 @@ class ValidationComponent extends Component {
     }
   };
 
+  // returns the correct color: orange week problme, red big problem
   whichColorForTest = testType => {
     if (testType === "") {
       return null;
@@ -98,6 +101,7 @@ class ValidationComponent extends Component {
   };
 
   render() {
+    // the test types
     const testTypeArray = [
       "Duplicate Rows",
       "Duplicate Domains",
@@ -105,7 +109,6 @@ class ValidationComponent extends Component {
       "Chain"
     ];
     const testType = this.props.testType;
-    console.log("validation test type", this.props);
     const backColor = this.whichColorForTest(testType);
     return testTypeArray.map((el, i) => {
       return (
