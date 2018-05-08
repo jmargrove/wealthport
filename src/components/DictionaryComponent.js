@@ -33,7 +33,8 @@ const ItemName = styled.p`
 `;
 
 const mapStateToProps = state => ({
-  dictionaries: state.dictionaries
+  dictionaries: state.dictionaries,
+  viewDictionary: state.viewDictionary
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -46,7 +47,12 @@ class DictionaryComponent extends Component {
     const array = Object.getOwnPropertyNames(this.props.dictionaries);
     return array.map((el, i) => {
       return (
-        <ItemContainer key={i}>
+        <ItemContainer
+          key={i}
+          style={{
+            backgroundColor: el === this.props.viewDictionary ? "#40a065" : null
+          }}
+        >
           <div
             style={{
               flex: 1
