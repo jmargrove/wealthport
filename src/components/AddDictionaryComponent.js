@@ -4,60 +4,36 @@ import CloseIcon from "mdi-react/CloseIcon";
 import CheckCircleOutlineIcon from "mdi-react/CheckCircleOutlineIcon";
 import { connect } from "react-redux";
 import { addNewDictionary } from "../actions.js";
+import { DelBox, ClickBox } from "./../presentational/Containers.js";
 
 const AddDictionaryContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 60px;
   width: 240px;
-  margin: 20px;
-  margin-bottom: 0;
-  margin-top: 0;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 5px 0 grey;
   background-color: lightgrey;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: grab;
+  cursor: pointer;
   &:hover {
     background-color: #8bbf9f;
   }
 `;
 
-const InputDictionaryContainer = styled.div`
-  height: 60px;
-  width: 240px;
-  margin: 20px;
-  margin-top: 0;
-  margin-bottom: 0;
+const InputDictionaryContainer = AddDictionaryContainer.extend`
   background-color: #5299d3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: auto;
-`;
-
-const ClickBox = styled.div`
-  width: 20px;
-  height: 20px;
-  border: solid;
-  border-color: black;
-  border-width: thin;
-  border-radius: 2px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 5px;
+  box-shadow: 1px 1px 5px 0 #427baa;
+  cursor: default;
   &:hover {
-    background-color: #8bbf9f;
-  }
-`;
-
-const DelBox = ClickBox.extend`
-  &:hover {
-    background-color: #db5461;
+    background-color: #5299d3;
   }
 `;
 
 const mapDispatchToProps = dispatch => ({
-  addNewDictionary: (name: string) => dispatch(addNewDictionary(name))
+  addNewDictionary: dictionaryName => dispatch(addNewDictionary(dictionaryName))
 });
 
 class AddDictionaryComponent extends Component {
@@ -91,9 +67,10 @@ class AddDictionaryComponent extends Component {
       return (
         <InputDictionaryContainer>
           <input
+            style={{ backgroundColor: "#E0F1FF" }}
             onKeyPress={this.handleKeyPress}
             autoFocus={true}
-            onBlur={() => this.setState({ toggleAddDictionaryInput: false })}
+            onBlur={this.toggleAddDictionary}
             ref={comp => (this.input = comp)}
             placeholder="Add..."
           />
@@ -108,7 +85,7 @@ class AddDictionaryComponent extends Component {
     } else {
       return (
         <AddDictionaryContainer onClick={this.toggleAddDictionary}>
-          <div> Add Dictionary </div>
+          <p> Add Dictionary </p>
         </AddDictionaryContainer>
       );
     }
