@@ -4,24 +4,25 @@ import ContentDuplicateIcon from "mdi-react/ContentDuplicateIcon";
 import SyncIcon from "mdi-react/SyncIcon";
 import AtomIcon from "mdi-react/AtomIcon";
 import { connect } from "react-redux";
-import { testDuplicateRows } from "./../actions.js";
-import { testDuplicateDomains } from "./../actions.js";
-import { testCycles } from "./../actions.js";
-import { testChain } from "./../actions.js";
+import { testDuplicateRows } from "./../actions/actions.js";
+import { testDuplicateDomains } from "./../actions/actions.js";
+import { testCycles } from "./../actions/actions.js";
+import { testChain } from "./../actions/actions.js";
 import DeleteForeverIcon from "mdi-react/DeleteForeverIcon";
-import { deleteErrorAuto } from "../actions.js";
+import { deleteErrorAuto } from "./../actions/actions.js";
+import { ClickBox, DelBox } from "./../presentational/Containers.js";
 
 const mapDispatchToProps = dispatch => ({
-  testDuplicateRows: dictionary => dispatch(testDuplicateRows(dictionary)),
-  testDuplicateDomains: dictionary =>
-    dispatch(testDuplicateDomains(dictionary)),
-  testCycles: dictionary => dispatch(testCycles(dictionary)),
-  testChain: dictionary => dispatch(testChain(dictionary)),
+  testDuplicateRows: testObj => dispatch(testDuplicateRows(testObj)),
+  testDuplicateDomains: testObj => dispatch(testDuplicateDomains(testObj)),
+  testCycles: testObj => dispatch(testCycles(testObj)),
+  testChain: testObj => dispatch(testChain(testObj)),
   deleteErrorAuto: obj => dispatch(deleteErrorAuto(obj))
 });
 
 const mapStateToProps = state => ({
-  dictionary: state.viewItem
+  dictionary: state.viewDictionary,
+  testType: state.testType
 });
 
 const TestContainer = styled.div`
@@ -36,32 +37,11 @@ const TestContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 2px 2px 5px 0 grey;
 `;
 
-const TextTestType = styled.div`margin-left: 5px;`;
-
-const Box = styled.div`
-  width: 25px;
-  height: 25px;
-  border: solid;
-  border-width: thin;
-  border-radius: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: grab;
-  &:hover {
-    background-color: #8bbf9f;
-  }
-`;
-
-const DelBox = Box.extend`
-  &:hover {
-    background-color: #db5461;
-  }
-`;
-
-class ValidationComponents extends Component {
+class ValidationComponent extends Component {
+  // select the correct icon to display for each test
   iconSelection = whichTest => {
     switch (whichTest) {
       case "Duplicate Rows": {
@@ -81,43 +61,64 @@ class ValidationComponents extends Component {
     }
   };
 
+  // dispatching the correct test
   whichTestToDispatch = (whichTestDispatch, dictionary) => {
+    const dispatchObj = { dictionary: dictionary, test: whichTestDispatch };
     switch (whichTestDispatch) {
       case "Duplicate Rows": {
-        this.props.testDuplicateRows(dictionary);
+        this.props.testDuplicateRows(dispatchObj);
         break;
       }
       case "Duplicate Domains": {
-        this.props.testDuplicateDomains(dictionary);
+        this.props.testDuplicateDomains(dispatchObj);
         break;
       }
       case "Cycles": {
-        this.props.testCycles(dictionary);
+        this.props.testCycles(dispatchObj);
         break;
       }
       case "Chain": {
-        this.props.testChain(dictionary);
+        this.props.testChain(dispatchObj);
         break;
       }
       default:
         return null;
     }
   };
-  buttonIsHovered = false;
-  setButtonHovered = bool => {
-    this.buttonIsHovered = bool;
+
+  // returns the correct color: orange week problme, red big problem
+  whichColorForTest = testType => {
+    if (testType === "") {
+      return null;
+    } else if (
+      testType === "Duplicate Rows" ||
+      testType === "Duplicate Domains"
+    ) {
+      return "#EC9A29";
+    } else if (testType === "Cycles" || testType === "Chain") {
+      return "#DF2935";
+    }
   };
 
   render() {
-    return [
+    // the test types
+    const testTypeArray = [
       "Duplicate Rows",
       "Duplicate Domains",
       "Cycles",
       "Chain"
-    ].map((el, i) => {
+    ];
+    const testType = this.props.testType;
+    const backColor = this.whichColorForTest(testType);
+    return testTypeArray.map((el, i) => {
       return (
-        <TestContainer key={i + el}>
-          <TextTestType>{el}</TextTestType>
+        <TestContainer
+          key={i + el}
+          style={{
+            backgroundColor: testType === el ? backColor : "white"
+          }}
+        >
+          <p style={{ marginLeft: "5px" }}>{el}</p>
           <div
             style={{
               width: "65px",
@@ -129,7 +130,6 @@ class ValidationComponents extends Component {
           >
             {i < 1 ? (
               <DelBox>
-                {console.log("this is here", this)}
                 <DeleteForeverIcon
                   onClick={() =>
                     this.props.deleteErrorAuto({
@@ -140,7 +140,7 @@ class ValidationComponents extends Component {
               </DelBox>
             ) : null}
 
-            <Box
+            <ClickBox
               style={{
                 marginLeft: "5px"
               }}
@@ -148,7 +148,7 @@ class ValidationComponents extends Component {
                 this.whichTestToDispatch(el, this.props.dictionary)}
             >
               {this.iconSelection(el)}
-            </Box>
+            </ClickBox>
           </div>
         </TestContainer>
       );
@@ -157,5 +157,5 @@ class ValidationComponents extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  ValidationComponents
+  ValidationComponent
 );

@@ -3,15 +3,19 @@ import {
   testingDuplicateDomains,
   testingCycles,
   testingChain,
-  deleteErrorAuto
+  deleteErrorAuto,
+  runningTests
 } from "./functions";
+import * as types from "./actions/types.js";
+
 import { defaultState } from "./defaultState.js";
 
 const reducer = (state = defaultState, action) => {
   switch (action.type) {
-    case "ADD_NEW_DICTIONARY_NAME": {
+    case types.ADD_NEW_DICTIONARY_NAME: {
       return {
         ...state,
+        viewDictionary: action.name,
         dictionaries: {
           ...state.dictionaries,
           [action.name]: [
@@ -24,27 +28,29 @@ const reducer = (state = defaultState, action) => {
         }
       };
     }
-    case "DELETE_DICTIONARY": {
-      console.log("DELETE_DICTIONARY", action);
+    case types.DELETE_DICTIONARY: {
       delete state.dictionaries[action.name];
       return {
         ...state,
         dictionaries: {
           ...state.dictionaries
         },
-        viewItem:
-          action.name === state.viewItem
-            ? Object.getOwnPropertyNames(state.dictionaries)[0]
-            : state.viewItem
+        viewDictionary:
+          action.name === state.viewDictionary
+            ? Object.getOwnPropertyNames(state.dictionaries)[
+                Object.getOwnPropertyNames(state.dictionaries).length - 1
+              ]
+            : state.viewDictionary
       };
     }
-    case "CHANGE_VIEW_ITEM": {
+    case types.CHANGE_VIEW_ITEM: {
       return {
         ...state,
-        viewItem: action.viewItem
+        testType: "",
+        viewDictionary: action.viewDictionary
       };
     }
-    case "DELETE_ROW": {
+    case types.DELETE_ROW: {
       return {
         ...state,
         dictionaries: {
@@ -57,7 +63,7 @@ const reducer = (state = defaultState, action) => {
         }
       };
     }
-    case "EDIT_ROW": {
+    case types.EDIT_ROW: {
       const editedDR = [...state.dictionaries[action.content.dictionary]];
       editedDR[action.content.i] = {
         domain:
@@ -82,54 +88,19 @@ const reducer = (state = defaultState, action) => {
         }
       };
     }
-    case "TEST_DUPLICATE_DOMAINS": {
-      const testDuplicateDomains = [...state.dictionaries[action.dictionary]];
-      const testedDuplicateDomains = testingDuplicateDomains(
-        testDuplicateDomains
-      );
-      return {
-        ...state,
-        dictionaries: {
-          ...state.dictionaries,
-          [action.dictionary]: [...testedDuplicateDomains]
-        }
-      };
+    case types.TEST_DUPLICATE_DOMAINS: {
+      return runningTests(state, action, testingDuplicateDomains);
     }
-    case "TEST_DUPLICATE_ROWS": {
-      const testDuplicateRows = [...state.dictionaries[action.dictionary]];
-      const testedDuplicateRows = testingDuplicateRows(testDuplicateRows);
-      console.log("test the duplicate rows", testedDuplicateRows);
-      return {
-        ...state,
-        dictionaries: {
-          ...state.dictionaries,
-          [action.dictionary]: [...testedDuplicateRows]
-        }
-      };
+    case types.TEST_DUPLICATE_ROWS: {
+      return runningTests(state, action, testingDuplicateRows);
     }
-    case "TEST_CYCLES": {
-      const testDuplicateRows = [...state.dictionaries[action.dictionary]];
-      const testedDuplicateRows = testingCycles(testDuplicateRows);
-      return {
-        ...state,
-        dictionaries: {
-          ...state.dictionaries,
-          [action.dictionary]: [...testedDuplicateRows]
-        }
-      };
+    case types.TEST_CYCLES: {
+      return runningTests(state, action, testingCycles);
     }
-    case "TEST_CHAIN": {
-      const testDuplicateRows = [...state.dictionaries[action.dictionary]];
-      const testedDuplicateRows = testingChain(testDuplicateRows);
-      return {
-        ...state,
-        dictionaries: {
-          ...state.dictionaries,
-          [action.dictionary]: [...testedDuplicateRows]
-        }
-      };
+    case types.TEST_CHAIN: {
+      return runningTests(state, action, testingChain);
     }
-    case "DELETE_ERROR_AUTO": {
+    case types.DELETE_ERROR_AUTO: {
       const dictionaryContents = [...state.dictionaries[action.dictionary]];
       const CleaneDictionaryContents = deleteErrorAuto(
         dictionaryContents,
@@ -137,6 +108,7 @@ const reducer = (state = defaultState, action) => {
       );
       return {
         ...state,
+        testType: "",
         dictionaries: {
           ...state.dictionaries,
           [action.dictionary]: [...CleaneDictionaryContents]

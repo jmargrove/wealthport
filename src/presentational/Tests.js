@@ -1,23 +1,27 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import ValidationComponents from "./../components/ValidationComponents.js";
-const TestsContainer = styled.div`width: 300px;`;
+import ValidationComponent from "./../components/ValidationComponents.js";
 
 const TestsHeader = styled.div`
   height: 60px;
   width: 260px;
   margin: 20px;
   margin-bottom: 0;
-  background-color: #5299d3;
+  background: linear-gradient(#5299d3, #4683b5);
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: solid;
+  border-top: solid;
+  border-width: thin;
+  border-color: black;
 `;
 
 const TestsConsoleContainer = styled.div`
   width: 260px;
-  height: 368px;
+  height: 268px;
   margin: 20px;
+  background-color: grey;
   display: flex;
   align-content: center;
   flex-direction: column;
@@ -31,6 +35,7 @@ const ValidationHeaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 1px 1px 1px 0 grey;
 `;
 
 const ValidationTestsContainer = styled.div`
@@ -41,18 +46,10 @@ const ValidationTestsContainer = styled.div`
   background-color: lightgrey;
 `;
 
-const FilterContainer = styled.div`
-  width: 256px;
-  height: 162px;
-  margin: 2px;
-  margin-top: 0;
-  background-color: white;
-`;
-
 class Tests extends Component {
   render() {
     return (
-      <TestsContainer>
+      <div style={{ width: "300px" }}>
         <TestsHeader>
           <div> Tests Console</div>
         </TestsHeader>
@@ -61,11 +58,10 @@ class Tests extends Component {
             <h3>V a l i d a t i o n</h3>
           </ValidationHeaderContainer>
           <ValidationTestsContainer>
-            <ValidationComponents />
+            <ValidationComponent />
           </ValidationTestsContainer>
-          <FilterContainer />
         </TestsConsoleContainer>
-      </TestsContainer>
+      </div>
     );
   }
 }

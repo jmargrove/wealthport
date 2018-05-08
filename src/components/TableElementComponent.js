@@ -1,23 +1,55 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import CheckCircleOutlineIcon from "mdi-react/CheckCircleOutlineIcon";
 import DeleteForeverIcon from "mdi-react/DeleteForeverIcon";
-import { EditRow } from "../actions.js";
-import { deleteRow } from "../actions.js";
-import { testDuplicateRows } from "../actions.js";
-import { testDuplicateDomains } from "../actions.js";
-import { testCycles } from "../actions.js";
-import { testChain } from "../actions.js";
+import { editRow } from "./../actions/actions.js";
+import { deleteRow } from "./../actions/actions.js";
+import { testDuplicateRows } from "./../actions/actions.js";
+import { testDuplicateDomains } from "./../actions/actions.js";
+import { testCycles } from "./../actions/actions.js";
+import { testChain } from "./../actions/actions.js";
+import { ClickBox } from "./../presentational/Containers.js";
+
+const DelBox = ClickBox.extend`
+  background-color: #40a065;
+  margin-left: 25px;
+  &:hover {
+    background-color: #db5461;
+  }
+`;
+
+const TableElementComtainer = styled.td`
+  height: 30px;
+  background-color: white;
+  box-shadow: 2px 2px 5px 0 grey;
+  cursor: text;
+  &:hover {
+    background-color: #40a065;
+  }
+`;
+
+const InputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 235px;
+  height: 28px;
+  margin-left: 10px;
+`;
+
+const TableText = styled.p`
+  margin-left: 10px;
+  font-size: 15px;
+  max-width: 230px;
+`;
 
 const mapDispatchToProps = dispatch => ({
-  editRow: obj => dispatch(EditRow(obj)),
+  editRow: obj => dispatch(editRow(obj)),
   deleteRow: obj => dispatch(deleteRow(obj)),
-  testDuplicateRows: dictionary => dispatch(testDuplicateRows(dictionary)),
-  testDuplicateDomains: dictionary =>
-    dispatch(testDuplicateDomains(dictionary)),
-  testCycles: dictionary => dispatch(testCycles(dictionary)),
-  testChain: dictionary => dispatch(testChain(dictionary))
+  testDuplicateRows: testObj => dispatch(testDuplicateRows(testObj)),
+  testDuplicateDomains: testObj => dispatch(testDuplicateDomains(testObj)),
+  testCycles: testObj => dispatch(testCycles(testObj)),
+  testChain: testObj => dispatch(testChain(testObj))
 });
 
 class TableElement extends Component {
@@ -58,22 +90,35 @@ class TableElement extends Component {
     }
   }
 
-  handleReTestPostDelEdit = testType => {
-    switch (testType) {
+  whichColorForElement = (error, input) => {
+    if (input) {
+      return "#8bbf9f";
+    } else if (error === "") {
+      return null;
+    } else if (error === "duplicate row" || error === "duplicate domain") {
+      return "#EC9A29";
+    } else {
+      return "#DF2935";
+    }
+  };
+
+  whichTestToDispatch = (whichTestDispatch, dictionary) => {
+    const dispatchObj = { dictionary: dictionary, test: whichTestDispatch };
+    switch (whichTestDispatch) {
       case "duplicate row": {
-        this.props.testDuplicateRows(this.state.dictionary);
+        this.props.testDuplicateRows(dispatchObj);
         break;
       }
       case "duplicate domain": {
-        this.props.testDuplicateDomains(this.state.dictionary);
+        this.props.testDuplicateDomains(dispatchObj);
         break;
       }
-      case "Cycle": {
-        this.props.testCycles(this.state.dictionary);
+      case "Cycles": {
+        this.props.testCycles(dispatchObj);
         break;
       }
       case "Chain": {
-        this.props.testChain(this.state.dictionary);
+        this.props.testChain(dispatchObj);
         break;
       }
       default:
@@ -94,13 +139,13 @@ class TableElement extends Component {
         focusLeft: false,
         focusRight: false
       });
-      this.handleReTestPostDelEdit(testType);
+      this.whichTestToDispatch(testType, this.state.dictionary);
     }
   };
 
   handleEdit = testType => {
     if (this.inputDomain && this.inputRange) {
-      this.handleReTestPostDelEdit(testType);
+      this.whichTestToDispatch(testType, this.state.dictionary);
       this.props.editRow({
         domain: this.inputDomain.value,
         range: this.inputRange.value,
@@ -120,25 +165,20 @@ class TableElement extends Component {
       dictionary: this.state.dictionary,
       rowNumber: this.state.i
     });
-    this.handleReTestPostDelEdit(testType);
+    this.whichTestToDispatch(testType, this.state.dictionary);
   };
 
   toggleInput = (
-    value,
-    focus,
-    input,
-    editButton,
-    backColorError,
-    backColorEditing
+    value, // elementValue in table
+    focus, // focus to edit
+    input, // inputDomain or inputRange
+    deleteRowButton // show deleteRowButton
   ) => {
     return !this.state.toggleInput ? (
       <TableText>{value}</TableText>
     ) : (
       <InputContainer>
         <input
-          style={{
-            backgroundColor: backColorError === "" ? "white" : backColorEditing
-          }}
           className="InputElement"
           ref={el => (this[input] = el)}
           onKeyPress={e => this.handleKeyPress(e, this.state.testResult)}
@@ -146,52 +186,31 @@ class TableElement extends Component {
           autoFocus={focus}
           placeholder={value}
         />
-        {editButton ? (
-          <Box
+        {deleteRowButton ? (
+          <DelBox
             style={{ marginRight: "5px" }}
             onMouseDown={() =>
               this.handleDeleteRowAction(this.state.testResult)}
           >
             <DeleteForeverIcon />
-          </Box>
+          </DelBox>
         ) : null}
       </InputContainer>
     );
   };
 
-  whichErrorHasBeenThrown = error => {
-    if (error === "") {
-      return null;
-    } else if (error === "duplicate row" || error === "duplicate domain") {
-      return "#EC9A29";
-    } else {
-      return "#DF2935";
-    }
-  };
-
   render() {
-    console.log("this.state", this.state);
     const elementDomain = this.state.domain;
     const elementRange = this.state.range;
-    const backColorError = this.whichErrorHasBeenThrown(this.state.testResult);
-    const backColorEditing = this.state.toggleInput ? backColorError : null;
+    const testResult = this.state.testResult;
+    const toggleInput = this.state.toggleInput;
+    const backColor = this.whichColorForElement(testResult, toggleInput);
     return (
-      <tbody
-        style={{
-          backgroundColor:
-            backColorError !== "" ? backColorError : backColorEditing
-        }}
-      >
-        <tr
-          style={{
-            backgroundColor:
-              backColorError !== "" ? backColorError : backColorEditing
-          }}
-        >
+      <tbody>
+        <tr>
           <TableElementComtainer
             style={{
-              backgroundColor:
-                backColorError !== "" ? backColorError : backColorEditing
+              backgroundColor: backColor
             }}
             onClick={() =>
               this.setState({
@@ -203,15 +222,12 @@ class TableElement extends Component {
               elementDomain,
               this.state.focusLeft,
               "inputDomain",
-              false,
-              backColorError,
-              backColorEditing
+              false
             )}
           </TableElementComtainer>
           <TableElementComtainer
             style={{
-              backgroundColor:
-                backColorError !== "" ? backColorError : backColorEditing
+              backgroundColor: backColor
             }}
             onClick={() =>
               this.setState({
@@ -223,9 +239,7 @@ class TableElement extends Component {
               elementRange,
               this.state.focusRight,
               "inputRange",
-              true,
-              backColorError,
-              backColorEditing
+              true
             )}
           </TableElementComtainer>
         </tr>
@@ -235,44 +249,3 @@ class TableElement extends Component {
 }
 
 export default connect(null, mapDispatchToProps)(TableElement);
-
-const TableElementComtainer = styled.td`
-  height: 30px;
-  background-color: white;
-  cursor: text;
-  &:hover {
-    background-color: #8bbf9f;
-  }
-`;
-
-const InputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  position: relative;
-  width: 235px;
-  height: 28px;
-  margin-left: 10px;
-`;
-
-const TableText = styled.p`
-  margin-left: 10px;
-  font-size: 15px;
-  max-width: 230px;
-`;
-
-const Box = styled.div`
-  height: 20px;
-  width: 20px;
-  background-color: white;
-  margin-left: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: solid;
-  border-width: thin;
-  border-radius: 2px;
-  cursor: grab;
-  &:hover {
-    background-color: #db5461;
-  }
-`;

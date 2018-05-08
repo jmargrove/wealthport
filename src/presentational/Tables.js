@@ -13,11 +13,14 @@ const AddDictionaryContainer = styled.div`
   width: 500px;
   margin: 20px;
   margin-bottom: 0;
-  background-color: #5299d3;
+  background: linear-gradient(#5299d3, #4683b5);
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: grab;
+  border-bottom: solid;
+  border-top: solid;
+  border-width: thin;
+  border-color: black;
 `;
 
 const TableContainer = styled.div`

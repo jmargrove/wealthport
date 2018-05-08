@@ -15,7 +15,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <body className="MaxWidth">
+        <div className="MaxWidth">
           <Header />
           <Body>
             <Dictionaries />
@@ -23,7 +23,7 @@ class App extends Component {
             <Tests />
           </Body>
           <div style={{ borderBottom: "solid", borderWidth: "thin" }} />
-        </body>
+        </div>
       </div>
     );
   }

@@ -1,27 +1,31 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { changeViewItem } from "../actions.js";
-import { deleteDictionary } from "../actions.js";
+import { changeViewDictionary } from "./../actions/actions.js";
+import { deleteDictionary } from "./../actions/actions.js";
 import DeleteForeverIcon from "mdi-react/DeleteForeverIcon";
+import { DelBox } from "./../presentational/Containers.js";
 
 const ItemContainer = styled.div`
+  padding-top: 5px;
   display: flex;
   margin: 20px;
   height: 75px;
   max-width: 260px;
-  background-color: lightgrey;
+  background-color: white;
   border: solid;
   border-color: black;
   border-radius: 3px;
-  cursor: grab;
+  cursor: pointer;
   border-width: thin;
+  box-shadow: 1px 1px 5px 0 grey;
   &:hover {
     background-color: #8bbf9f;
+    box-shadow: 2px 2px 10px 0 grey;
   }
 `;
 
-const ItemName = styled.div`
+const ItemName = styled.p`
   z-index: 99;
   font-size: 20px;
   font-weight: bold;
@@ -29,48 +33,37 @@ const ItemName = styled.div`
 `;
 
 const mapStateToProps = state => ({
-  dictionaries: state.dictionaries
+  dictionaries: state.dictionaries,
+  viewDictionary: state.viewDictionary
 });
 
 const mapDispatchToProps = dispatch => ({
-  changeViewItem: item => dispatch(changeViewItem(item)),
+  changeViewDictionary: item => dispatch(changeViewDictionary(item)),
   deleteDictionary: name => dispatch(deleteDictionary(name))
 });
-
-const Box = styled.div`
-  height: 20px;
-  width: 20px;
-  margin: 5px;
-  z-index: 99;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: solid;
-  border-width: thin;
-  border-radius: 2px;
-  cursor: grab;
-  &:hover {
-    background-color: #db5461;
-  }
-`;
 
 class DictionaryComponent extends Component {
   DictionaryItems = () => {
     const array = Object.getOwnPropertyNames(this.props.dictionaries);
-    return array.map((el, i) => {
+    return array.reverse().map((el, i) => {
       return (
-        <ItemContainer key={i}>
+        <ItemContainer
+          key={i}
+          style={{
+            backgroundColor: el === this.props.viewDictionary ? "#40a065" : null
+          }}
+        >
           <div
             style={{
               flex: 1
             }}
           >
-            <Box onClick={() => this.props.deleteDictionary(el)}>
+            <DelBox onClick={() => this.props.deleteDictionary(el)}>
               <DeleteForeverIcon />
-            </Box>
+            </DelBox>
           </div>
           <div
-            onClick={() => this.props.changeViewItem(el)}
+            onClick={() => this.props.changeViewDictionary(el)}
             style={{
               flex: 6,
               display: "Flex",
@@ -86,7 +79,6 @@ class DictionaryComponent extends Component {
   };
 
   render() {
-    const dictionaries = this.props.dictionaries;
     return <div>{this.DictionaryItems()}</div>;
   }
 }

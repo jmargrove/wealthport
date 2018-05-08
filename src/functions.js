@@ -1,9 +1,22 @@
-exports.testingDuplicateRows = array => {
-  array = array.map(el => {
-    el.testResult = "";
-    return el;
-  });
+const errorHandler = array => {
+  return array
+    .map(el => {
+      if (el) {
+        el.testResult = "";
+        return el;
+      }
+    })
+    .filter(el => {
+      return !!el;
+    })
+    .filter(el => {
+      return el.domain !== "" || el.range !== "";
+    });
+};
 
+exports.testingDuplicateRows = arr => {
+  const array = errorHandler(arr);
+  console.log(array);
   let j = 1;
   function recur() {
     for (let i = 0; i < array.length; i++) {
@@ -33,12 +46,8 @@ exports.testingDuplicateRows = array => {
   return recur();
 };
 
-exports.testingDuplicateDomains = array => {
-  array = array.map(el => {
-    el.testResult = "";
-    return el;
-  });
-
+exports.testingDuplicateDomains = arr => {
+  const array = errorHandler(arr);
   let j = 1;
   function recur() {
     for (let i = 0; i < array.length; i++) {
@@ -64,17 +73,15 @@ exports.testingDuplicateDomains = array => {
   return recur();
 };
 
-exports.testingCycles = array => {
+exports.testingCycles = arr => {
   // reset values
-  array = array.map(el => {
-    el.testResult = "";
-    return el;
-  });
+  const array = errorHandler(arr);
   // find the cycle ones
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length; j++) {
       if (
         array[i].domain !== "" &&
+        i !== j &&
         array[i].domain === array[j].range &&
         array[j].domain === array[i].range
       ) {
@@ -86,17 +93,14 @@ exports.testingCycles = array => {
   return array;
 };
 
-exports.testingChain = array => {
-  // reset values
-  array = array.map(el => {
-    el.testResult = "";
-    return el;
-  });
+exports.testingChain = arr => {
+  const array = errorHandler(arr);
   // find the chains
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length; j++) {
       if (
         array[i].domain !== "" &&
+        i !== j &&
         array[i].domain === array[j].range &&
         array[j].domain !== array[i].range
       ) {
@@ -130,4 +134,21 @@ exports.deleteErrorAuto = (array, testType) => {
   } else {
     return array;
   }
+};
+
+exports.runningTests = (state, action, fun) => {
+  const testArray = [...state.dictionaries[action.dictionary]];
+  const testedArray = fun(testArray);
+  const bool = testedArray.filter(el => {
+    return el.testResult !== "";
+  })[0];
+
+  return {
+    ...state,
+    testType: !bool ? "" : action.test,
+    dictionaries: {
+      ...state.dictionaries,
+      [action.dictionary]: [...testedArray]
+    }
+  };
 };
