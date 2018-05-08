@@ -9,6 +9,15 @@ import { testDuplicateRows } from "../actions.js";
 import { testDuplicateDomains } from "../actions.js";
 import { testCycles } from "../actions.js";
 import { testChain } from "../actions.js";
+import { ClickBox } from "./../presentational/Containers.js";
+
+const DelBox = ClickBox.extend`
+  background-color: #40a065;
+  margin-left: 25px;
+  &:hover {
+    background-color: #db5461;
+  }
+`;
 
 const TableElementComtainer = styled.td`
   height: 30px;
@@ -33,23 +42,6 @@ const TableText = styled.p`
   margin-left: 10px;
   font-size: 15px;
   max-width: 230px;
-`;
-
-const Box = styled.div`
-  height: 20px;
-  width: 20px;
-  background-color: #40a065;
-  margin-left: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: solid;
-  border-width: thin;
-  border-radius: 2px;
-  cursor: grab;
-  &:hover {
-    background-color: #db5461;
-  }
 `;
 
 const mapDispatchToProps = dispatch => ({
@@ -99,6 +91,18 @@ class TableElement extends Component {
       });
     }
   }
+
+  whichColorForElement = (error, input) => {
+    if (input) {
+      return "#8bbf9f";
+    } else if (error === "") {
+      return null;
+    } else if (error === "duplicate row" || error === "duplicate domain") {
+      return "#EC9A29";
+    } else {
+      return "#DF2935";
+    }
+  };
 
   handleReTestPostDelEdit = testType => {
     switch (testType) {
@@ -184,28 +188,16 @@ class TableElement extends Component {
           placeholder={value}
         />
         {deleteRowButton ? (
-          <Box
+          <DelBox
             style={{ marginRight: "5px" }}
             onMouseDown={() =>
               this.handleDeleteRowAction(this.state.testResult)}
           >
             <DeleteForeverIcon />
-          </Box>
+          </DelBox>
         ) : null}
       </InputContainer>
     );
-  };
-
-  whichColorForElement = (error, input) => {
-    if (input) {
-      return "#8bbf9f";
-    } else if (error === "") {
-      return null;
-    } else if (error === "duplicate row" || error === "duplicate domain") {
-      return "#EC9A29";
-    } else {
-      return "#DF2935";
-    }
   };
 
   render() {
