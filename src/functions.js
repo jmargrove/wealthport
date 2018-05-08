@@ -16,7 +16,6 @@ const errorHandler = array => {
 
 exports.testingDuplicateRows = arr => {
   const array = errorHandler(arr);
-  console.log(array);
   let j = 1;
   function recur() {
     for (let i = 0; i < array.length; i++) {
