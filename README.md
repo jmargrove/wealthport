@@ -4,7 +4,7 @@ https://t03jam8.github.io/wealthport/
 
 
 <p align="center">
-<img align="right" src="https://thumbs.gfycat.com/BrokenEthicalBrahmanbull-size_restricted.gif" height="400px">
+<img align="center" src="https://thumbs.gfycat.com/BrokenEthicalBrahmanbull-size_restricted.gif" height="200px">
 </p>
 
 
