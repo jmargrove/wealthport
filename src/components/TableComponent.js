@@ -20,8 +20,8 @@ const TableHeader = styled.th`
 `;
 
 const mapStateToProps = state => ({
-  data: state.dictionaries,
-  viewDictionary: state.viewDictionary
+  data: state.reducer.dictionaries,
+  viewDictionary: state.reducer.viewDictionary
 });
 
 const mapDispatchToProps = dispatch => ({

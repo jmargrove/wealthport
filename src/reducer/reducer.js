@@ -5,10 +5,10 @@ import {
   testingChain,
   deleteErrorAuto,
   runningTests
-} from "./functions";
-import * as types from "./actions/types.js";
+} from "./../functions";
+import * as types from "./../actions/types.js";
 
-import { defaultState } from "./defaultState.js";
+import { defaultState } from "./../defaultState.js";
 
 const reducer = (state = defaultState, action) => {
   switch (action.type) {

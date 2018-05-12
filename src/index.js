@@ -5,13 +5,14 @@ import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import reducer from "./reducer";
+import rootReducer from "./reducer/index.js";
 
 let store = createStore(
-  reducer,
+  rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+console.log("the store", store.getState());
 ReactDOM.render(
   <Provider store={store}>
     <App />

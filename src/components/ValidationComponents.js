@@ -21,8 +21,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  dictionary: state.viewDictionary,
-  testType: state.testType
+  dictionary: state.reducer.viewDictionary,
+  testType: state.reducer.testType
 });
 
 const TestContainer = styled.div`

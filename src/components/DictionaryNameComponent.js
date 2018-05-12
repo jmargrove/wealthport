@@ -3,16 +3,20 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 
 const mapStateToProps = state => ({
-  viewDictionary: state.viewDictionary
+  viewDictionary: state.reducer.viewDictionary
 });
 
 const ViewDictionary = styled.p`font-size: 25px;`;
 
 class DictionaryNameComponent extends Component {
   render () {
-    return (
-      <ViewDictionary>{this.props.viewDictionary.toUpperCase()}</ViewDictionary>
-    );
+    if (this.props) {
+      return (
+        <ViewDictionary>
+          {this.props.viewDictionary.toUpperCase()}
+        </ViewDictionary>
+      );
+    }
   }
 }
 
