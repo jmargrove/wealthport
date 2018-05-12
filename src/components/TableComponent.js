@@ -12,13 +12,6 @@ const TableBounds = styled.div`
   font-weight: bold;
 `;
 
-const TableHeader = styled.th`
-  width: 250px;
-  height: 30px;
-  background-color: #ababab;
-  box-shadow: 2px 2px 5px 0 grey;
-`;
-
 const mapStateToProps = state => ({
   data: state.dictionaries,
   viewDictionary: state.viewDictionary
@@ -46,8 +39,8 @@ class TableComponent extends Component {
         <table>
           <tbody>
             <tr>
-              <TableHeader>D o m a i n</TableHeader>
-              <TableHeader>R a n g e</TableHeader>
+              <td>D o m a i n</td>
+              <td>R a n g e</td>
             </tr>
           </tbody>
           {numberOfElements.map((el, i) => {
