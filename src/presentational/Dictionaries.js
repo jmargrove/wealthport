@@ -26,7 +26,7 @@ const DictionaryTitle = styled.div`
   width: 240px;
   margin: 20px;
   margin-bottom: 0;
-  background: linear-gradient(#5299d3, #4683b5);
+  background-color: #5299d3;
   display: flex;
   justify-content: center;
   align-items: center;

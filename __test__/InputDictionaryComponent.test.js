@@ -6,7 +6,7 @@ import AddDictionary from "./../src/presentational/AddDictionary.js";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import calculatorReducers from "./../src/reducer.js";
+import calculatorReducers from "./../src/reducer/reducer.js";
 import Adapter from "enzyme-adapter-react-15";
 import ShallowRenderer from "react-test-renderer/shallow";
 

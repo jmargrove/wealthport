@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import CloseIcon from "mdi-react/CloseIcon";
 import { connect } from "react-redux";
 import CheckCircleOutlineIcon from "mdi-react/CheckCircleOutlineIcon";

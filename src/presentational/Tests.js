@@ -7,7 +7,7 @@ const TestsHeader = styled.div`
   width: 260px;
   margin: 20px;
   margin-bottom: 0;
-  background: linear-gradient(#5299d3, #4683b5);
+  background-color: #5299d3;
   display: flex;
   justify-content: center;
   align-items: center;
