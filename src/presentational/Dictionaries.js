@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import DictionaryComponent from "../components/DictionaryComponent.js";
-import AddDictionaryComponent from "../components/AddDictionaryComponent.js";
+import AddDictionary from "./AddDictionary.js";
 
 const DictionaryContainer = styled.div`
   width: 280px;
@@ -44,7 +44,7 @@ class Dictionaries extends Component {
         <DictionaryList>
           <DictionaryComponent />
         </DictionaryList>
-        <AddDictionaryComponent />
+        <AddDictionary />
       </DictionaryContainer>
     );
   }
