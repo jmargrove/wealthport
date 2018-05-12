@@ -37,7 +37,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class AddDictionaryComponent extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       toggleAddDictionaryInput: false
@@ -62,7 +62,7 @@ class AddDictionaryComponent extends Component {
     this.toggleAddDictionary();
   };
 
-  render() {
+  render () {
     if (this.state.toggleAddDictionaryInput) {
       return (
         <InputDictionaryContainer>

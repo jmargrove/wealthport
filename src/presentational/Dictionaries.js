@@ -37,7 +37,7 @@ const DictionaryTitle = styled.div`
 `;
 
 class Dictionaries extends Component {
-  render() {
+  render () {
     return (
       <DictionaryContainer>
         <DictionaryTitle>Avalible Dictionaries </DictionaryTitle>

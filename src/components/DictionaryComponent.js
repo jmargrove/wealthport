@@ -78,7 +78,7 @@ class DictionaryComponent extends Component {
     });
   };
 
-  render() {
+  render () {
     return <div>{this.DictionaryItems()}</div>;
   }
 }

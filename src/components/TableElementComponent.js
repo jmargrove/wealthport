@@ -53,7 +53,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class TableElement extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       toggleInput: false,
@@ -68,7 +68,7 @@ class TableElement extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.setState({
       domain: this.props.domain,
       range: this.props.range,
@@ -77,7 +77,7 @@ class TableElement extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (nextProps !== this.props) {
       this.setState({
         domain: nextProps.domain,
@@ -105,24 +105,24 @@ class TableElement extends Component {
   whichTestToDispatch = (whichTestDispatch, dictionary) => {
     const dispatchObj = { dictionary: dictionary, test: whichTestDispatch };
     switch (whichTestDispatch) {
-      case "duplicate row": {
-        this.props.testDuplicateRows(dispatchObj);
-        break;
-      }
-      case "duplicate domain": {
-        this.props.testDuplicateDomains(dispatchObj);
-        break;
-      }
-      case "Cycle": {
-        this.props.testCycles(dispatchObj);
-        break;
-      }
-      case "Chain": {
-        this.props.testChain(dispatchObj);
-        break;
-      }
-      default:
-        return null;
+    case "duplicate row": {
+      this.props.testDuplicateRows(dispatchObj);
+      break;
+    }
+    case "duplicate domain": {
+      this.props.testDuplicateDomains(dispatchObj);
+      break;
+    }
+    case "Cycle": {
+      this.props.testCycles(dispatchObj);
+      break;
+    }
+    case "Chain": {
+      this.props.testChain(dispatchObj);
+      break;
+    }
+    default:
+      return null;
     }
   };
 
@@ -199,7 +199,7 @@ class TableElement extends Component {
     );
   };
 
-  render() {
+  render () {
     const elementDomain = this.state.domain;
     const elementRange = this.state.range;
     const testResult = this.state.testResult;

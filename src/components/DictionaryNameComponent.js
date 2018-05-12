@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
 const ViewDictionary = styled.p`font-size: 25px;`;
 
 class DictionaryNameComponent extends Component {
-  render() {
+  render () {
     return (
       <ViewDictionary>{this.props.viewDictionary.toUpperCase()}</ViewDictionary>
     );

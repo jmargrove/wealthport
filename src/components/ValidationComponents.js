@@ -44,20 +44,20 @@ class ValidationComponent extends Component {
   // select the correct icon to display for each test
   iconSelection = whichTest => {
     switch (whichTest) {
-      case "Duplicate Rows": {
-        return <ContentDuplicateIcon />;
-      }
-      case "Duplicate Domains": {
-        return <div>D2</div>;
-      }
-      case "Cycles": {
-        return <SyncIcon />;
-      }
-      case "Chain": {
-        return <AtomIcon />;
-      }
-      default:
-        return null;
+    case "Duplicate Rows": {
+      return <ContentDuplicateIcon />;
+    }
+    case "Duplicate Domains": {
+      return <div>D2</div>;
+    }
+    case "Cycles": {
+      return <SyncIcon />;
+    }
+    case "Chain": {
+      return <AtomIcon />;
+    }
+    default:
+      return null;
     }
   };
 
@@ -65,24 +65,24 @@ class ValidationComponent extends Component {
   whichTestToDispatch = (whichTestDispatch, dictionary) => {
     const dispatchObj = { dictionary: dictionary, test: whichTestDispatch };
     switch (whichTestDispatch) {
-      case "Duplicate Rows": {
-        this.props.testDuplicateRows(dispatchObj);
-        break;
-      }
-      case "Duplicate Domains": {
-        this.props.testDuplicateDomains(dispatchObj);
-        break;
-      }
-      case "Cycles": {
-        this.props.testCycles(dispatchObj);
-        break;
-      }
-      case "Chain": {
-        this.props.testChain(dispatchObj);
-        break;
-      }
-      default:
-        return null;
+    case "Duplicate Rows": {
+      this.props.testDuplicateRows(dispatchObj);
+      break;
+    }
+    case "Duplicate Domains": {
+      this.props.testDuplicateDomains(dispatchObj);
+      break;
+    }
+    case "Cycles": {
+      this.props.testCycles(dispatchObj);
+      break;
+    }
+    case "Chain": {
+      this.props.testChain(dispatchObj);
+      break;
+    }
+    default:
+      return null;
     }
   };
 
@@ -100,7 +100,7 @@ class ValidationComponent extends Component {
     }
   };
 
-  render() {
+  render () {
     // the test types
     const testTypeArray = [
       "Duplicate Rows",

@@ -31,7 +31,7 @@ const TableContainer = styled.div`
 `;
 
 class Tables extends Component {
-  render() {
+  render () {
     return (
       <ViewContentContainer>
         <AddDictionaryContainer>

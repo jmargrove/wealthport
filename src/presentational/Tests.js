@@ -47,7 +47,7 @@ const ValidationTestsContainer = styled.div`
 `;
 
 class Tests extends Component {
-  render() {
+  render () {
     return (
       <div style={{ width: "300px" }}>
         <TestsHeader>
