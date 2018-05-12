@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import DictionaryComponent from "../components/DictionaryComponent.js";
-import AddDictionaryComponent from "../components/AddDictionaryComponent.js";
+import AddDictionary from "./AddDictionary.js";
 
 const DictionaryContainer = styled.div`
   width: 280px;
@@ -26,7 +26,7 @@ const DictionaryTitle = styled.div`
   width: 240px;
   margin: 20px;
   margin-bottom: 0;
-  background: linear-gradient(#5299d3, #4683b5);
+  background-color: #5299d3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,14 +37,14 @@ const DictionaryTitle = styled.div`
 `;
 
 class Dictionaries extends Component {
-  render() {
+  render () {
     return (
       <DictionaryContainer>
         <DictionaryTitle>Avalible Dictionaries </DictionaryTitle>
         <DictionaryList>
           <DictionaryComponent />
         </DictionaryList>
-        <AddDictionaryComponent />
+        <AddDictionary />
       </DictionaryContainer>
     );
   }

@@ -33,8 +33,8 @@ const ItemName = styled.p`
 `;
 
 const mapStateToProps = state => ({
-  dictionaries: state.dictionaries,
-  viewDictionary: state.viewDictionary
+  dictionaries: state.reducer.dictionaries,
+  viewDictionary: state.reducer.viewDictionary
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -78,7 +78,7 @@ class DictionaryComponent extends Component {
     });
   };
 
-  render() {
+  render () {
     return <div>{this.DictionaryItems()}</div>;
   }
 }

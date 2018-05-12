@@ -20,8 +20,8 @@ const TableHeader = styled.th`
 `;
 
 const mapStateToProps = state => ({
-  data: state.dictionaries,
-  viewDictionary: state.viewDictionary
+  data: state.reducer.dictionaries,
+  viewDictionary: state.reducer.viewDictionary
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -29,7 +29,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class TableComponent extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       viewDictionary: null,
@@ -37,7 +37,7 @@ class TableComponent extends Component {
     };
   }
 
-  render() {
+  render () {
     const data = this.props.data[this.props.viewDictionary];
     const numberOfElements = Array.apply(null, { length: 14 });
 

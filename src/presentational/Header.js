@@ -19,13 +19,13 @@ const HeaderTitle = styled.h1`
 `;
 
 class Header extends Component {
-  render() {
+  render () {
     return (
       <HeaderContainer>
         <HeaderTitle> Wealthport </HeaderTitle>
         <img
           alt="logo"
-          src={require("../logo/logo.svg")}
+          src={require("../assests/logo.svg")}
           style={{ width: "70px", marginTop: "15px" }}
         />
       </HeaderContainer>

@@ -12,7 +12,7 @@ const Body = styled.div`
 `;
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <div className="App">
         <div className="MaxWidth">

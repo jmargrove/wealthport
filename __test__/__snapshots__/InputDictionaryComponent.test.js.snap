@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`>>>InputDictionaryComponent  +++capturing Snapshot of InputDictionaryComponent +++capturing Snapshot of InputDictionaryComponent 1`] = `
+<div
+  className="InputDictionaryContainer sc-bxivhb fsdWwv"
+>
+  <input
+    autoFocus={true}
+    onBlur={undefined}
+    onKeyPress={[Function]}
+    placeholder="Add..."
+    style={
+      Object {
+        "backgroundColor": "#E0F1FF",
+      }
+    }
+  />
+  <div
+    className="sc-bwzfXH iTItjm"
+    onMouseDown={undefined}
+  >
+    <svg
+      className="mdi-icon "
+      fill="#000"
+      height={24}
+      viewBox="0 0 24 24"
+      width={24}
+    >
+      <path
+        d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+      />
+    </svg>
+  </div>
+  <div
+    className="sc-bdVaJa jovjJ"
+    onMouseDown={[Function]}
+  >
+    <svg
+      className="mdi-icon "
+      fill="#000"
+      height={24}
+      viewBox="0 0 24 24"
+      width={24}
+    >
+      <path
+        d="M12,2C17.52,2 22,6.48 22,12C22,17.52 17.52,22 12,22C6.48,22 2,17.52 2,12C2,6.48 6.48,2 12,2M12,4C7.58,4 4,7.58 4,12C4,16.42 7.58,20 12,20C16.42,20 20,16.42 20,12C20,7.58 16.42,4 12,4M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z"
+      />
+    </svg>
+  </div>
+</div>
+`;
