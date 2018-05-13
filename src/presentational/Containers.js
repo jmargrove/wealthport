@@ -15,8 +15,10 @@ export const ClickBox = styled.div`
   margin-left: 5px;
   cursor: pointer;
   box-shadow: 0.5px 0.5px 2px 0 #427baa;
+  transition: background-color 200ms ease;
   &:hover {
     background-color: #8bbf9f;
+    transition: background-color 200ms ease;
   }
 `;
 
@@ -37,9 +39,11 @@ export const AddDictionaryContainer = styled.div`
   border-radius: 3px;
   box-shadow: 1px 1px 5px 0 grey;
   background-color: lightgrey;
+  transition: background-color 500ms ease;
   cursor: pointer;
   &:hover {
     background-color: #8bbf9f;
+    transition: background-color 500ms ease;
   }
 `;
 
