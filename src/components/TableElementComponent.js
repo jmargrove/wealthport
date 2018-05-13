@@ -16,8 +16,10 @@ const TableElementContainer = styled.td`
   background-color: white;
   box-shadow: 2px 2px 5px 0 grey;
   cursor: text;
+  transition: background-color 300ms ease;
   &:hover {
     background-color: #40a065;
+    transition: background-color 300ms ease;
   }
 `;
 

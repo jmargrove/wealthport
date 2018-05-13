@@ -50,7 +50,6 @@ const reducer = (state = defaultState, action) => {
         el.testResult = "";
         return el;
       });
-
     return {
       ...state,
       dictionaries: { ...state.dictionaries },

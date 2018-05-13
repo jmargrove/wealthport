@@ -10,10 +10,12 @@ const ItemContainer = styled.div`
   cursor: pointer;
   border-width: thin;
   box-shadow: 1px 1px 5px 0 grey;
-  transition: height 200ms 0ms, width 200ms 0ms;
+  transition: height 200ms 0ms, width 200ms 0ms, background-color 700ms ease,
+    box-shadow 200ms 0ms;
   &:hover {
     background-color: #8bbf9f;
     box-shadow: 2px 2px 10px 0 grey;
+    transition: background-color 400ms ease, box-shadow 700ms ease;
   }
 `;
 
