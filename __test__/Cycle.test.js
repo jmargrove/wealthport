@@ -1,4 +1,4 @@
-import { testingCycles } from "./../src/functions.js";
+import { testingCycles } from "./../src/functions/functions.js";
 import {
   testArray1,
   testArray2,
@@ -17,33 +17,33 @@ describe(">>>testingCycles +++", () => {
 
   it("+++Cycles tests +++ has a Cycle -- array2", () => {
     const res = testingCycles(testArray2);
-    expect(res[0].testResult).toBe("Cycle");
-    expect(res[1].testResult).toBe("Cycle");
+    expect(res[0].testResult).toBe("cycle");
+    expect(res[1].testResult).toBe("cycle");
   });
 
   it("+++Cycles tests +++ has a cycle at the begining -- array3", () => {
     const res = testingCycles(testArray3);
-    expect(res[0].testResult).toBe("Cycle");
-    expect(res[1].testResult).toBe("Cycle");
+    expect(res[0].testResult).toBe("cycle");
+    expect(res[1].testResult).toBe("cycle");
     expect(res[2].testResult).toBe("");
   });
 
   it("+++Cycles tests +++ has a cycle at either end of the array4 with two duplicate rows", () => {
     const res = testingCycles(testArray4);
-    expect(res[0].testResult).toBe("Cycle");
+    expect(res[0].testResult).toBe("cycle");
     expect(res[1].testResult).toBe("");
     expect(res[2].testResult).toBe("");
     expect(res[3].testResult).toBe("");
-    expect(res[4].testResult).toBe("Cycle");
-    expect(res[5].testResult).toBe("Cycle");
+    expect(res[4].testResult).toBe("cycle");
+    expect(res[5].testResult).toBe("cycle");
   });
 
   it("+++Cycles tests +++ with a Cycle in the middle", () => {
     const res = testingCycles(testArray5);
     expect(res[0].testResult).toBe("");
     expect(res[1].testResult).toBe("");
-    expect(res[2].testResult).toBe("Cycle");
-    expect(res[3].testResult).toBe("Cycle");
+    expect(res[2].testResult).toBe("cycle");
+    expect(res[3].testResult).toBe("cycle");
     expect(res[4].testResult).toBe("");
   });
 
@@ -54,8 +54,8 @@ describe(">>>testingCycles +++", () => {
     expect(res[2].testResult).toBe("");
     expect(res[3].testResult).toBe("");
     expect(res[4].testResult).toBe("");
-    expect(res[5].testResult).toBe("Cycle");
-    expect(res[5].testResult).toBe("Cycle");
+    expect(res[5].testResult).toBe("cycle");
+    expect(res[5].testResult).toBe("cycle");
   });
 });
 

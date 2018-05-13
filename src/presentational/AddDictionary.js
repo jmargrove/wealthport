@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { AddDictionaryContainer } from "./Containers.js";
 import InputDictionaryComponent from "./../components/InputDictionaryComponent.js";
 
+//description: displaying add dictionary button or the input
+
 class AddDictionary extends Component {
   constructor (props) {
     super(props);

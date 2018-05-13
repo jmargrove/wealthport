@@ -3,6 +3,8 @@ import styled from "styled-components";
 import TableComponent from "./../components/TableComponent.js";
 import DictionaryNameComponent from "./../components/DictionaryNameComponent";
 
+//description: displays the centeral pannel components, the "Table"
+
 const ViewContentContainer = styled.div`
   width: 540px;
   height: 100%;

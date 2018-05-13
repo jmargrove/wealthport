@@ -1,4 +1,4 @@
-import { testingDuplicateRows } from "./../src/functions.js";
+import { testingDuplicateRows } from "./../src/functions/functions.js";
 import {
   testArray1,
   testArray2,

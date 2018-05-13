@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
+//description: renders the dictionary name currently being viewed
+
 const mapStateToProps = state => ({
   viewDictionary: state.reducer.viewDictionary
 });

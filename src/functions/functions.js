@@ -1,3 +1,6 @@
+// This is for handling the errors in the table, where, if user selects a row
+// with empty rows in between, these undefined areas will be removed, and the
+// new rows will be pushed to the top
 const errorHandler = array => {
   const resetArray = array.map(el => {
     if (el) {
@@ -17,6 +20,7 @@ const errorHandler = array => {
     });
 };
 
+// Test for duplicate rows
 exports.testingDuplicateRows = arr => {
   const array = errorHandler(arr);
   for (let i = 0; i < array.length; i++) {
@@ -36,6 +40,7 @@ exports.testingDuplicateRows = arr => {
   return array;
 };
 
+// Testing for duplicate domains
 exports.testingDuplicateDomains = arr => {
   const array = errorHandler(arr);
   for (let i = 0; i < array.length; i++) {
@@ -54,6 +59,7 @@ exports.testingDuplicateDomains = arr => {
   return array;
 };
 
+// Testing for cycles
 exports.testingCycles = arr => {
   // reset values
   const array = errorHandler(arr);
@@ -65,14 +71,15 @@ exports.testingCycles = arr => {
         array[i].domain === array[j].range &&
         array[j].domain === array[i].range
       ) {
-        array[i].testResult = "Cycle";
-        array[j].testResult = "Cycle";
+        array[i].testResult = "cycle";
+        array[j].testResult = "cycle";
       }
     }
   }
   return array;
 };
 
+// Testing for Chains
 exports.testingChain = arr => {
   const array = errorHandler(arr);
   // find the chains
@@ -84,8 +91,8 @@ exports.testingChain = arr => {
         array[i].domain === array[j].range &&
         array[j].domain !== array[i].range
       ) {
-        array[i].testResult = "Chain";
-        array[j].testResult = "Chain";
+        array[i].testResult = "chain";
+        array[j].testResult = "chain";
       }
     }
   }
@@ -94,7 +101,7 @@ exports.testingChain = arr => {
 
 exports.deleteErrorAuto = (array, testType) => {
   let res = [];
-  if (testType === "Duplicate Rows") {
+  if (testType === "duplicate row") {
     const histArray = [];
     res = array.filter(el => {
       if (

@@ -9,6 +9,8 @@ import {
   InputDictionaryContainer
 } from "./../presentational/Containers.js";
 
+//description: for adding a new dictionary
+
 const mapDispatchToProps = dispatch => ({
   addNewDictionary: dictionaryName => dispatch(addNewDictionary(dictionaryName))
 });

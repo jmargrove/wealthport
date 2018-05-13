@@ -5,7 +5,7 @@ import {
   testingChain,
   deleteErrorAuto,
   runningTests
-} from "./../functions";
+} from "./../functions/functions.js";
 import * as types from "./../actions/types.js";
 
 import { defaultState } from "./../defaultState.js";

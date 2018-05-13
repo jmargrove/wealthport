@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-const HeaderContainer = styled.div`
+//description: the web-apps header displaying the title "wealthport" and logo
+
+const HeaderContainer = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;

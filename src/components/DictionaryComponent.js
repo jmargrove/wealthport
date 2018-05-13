@@ -6,6 +6,8 @@ import { deleteDictionary } from "./../actions/actions.js";
 import DeleteForeverIcon from "mdi-react/DeleteForeverIcon";
 import { DelBox } from "./../presentational/Containers.js";
 
+//description: list items of dictionaries, with delete icon.
+
 const ItemContainer = styled.div`
   padding-top: 5px;
   display: flex;

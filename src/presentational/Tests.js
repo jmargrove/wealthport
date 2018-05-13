@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import ValidationComponent from "./../components/ValidationComponents.js";
 
+//description: displays the validation pannel and tests on right pannel
+
 const TestsHeader = styled.div`
   height: 60px;
   width: 260px;

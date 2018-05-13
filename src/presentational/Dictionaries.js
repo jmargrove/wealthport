@@ -3,6 +3,8 @@ import styled from "styled-components";
 import DictionaryComponent from "../components/DictionaryComponent.js";
 import AddDictionary from "./AddDictionary.js";
 
+//description: display left pannel with all the dictionary items and input etc
+
 const DictionaryContainer = styled.div`
   width: 280px;
   height: 100%;

@@ -1,4 +1,4 @@
-import { testingChain } from "./../src/functions.js";
+import { testingChain } from "./../src/functions/functions.js";
 import {
   testArray1,
   testArray2,
@@ -17,25 +17,25 @@ describe(">>>testingChain +++", () => {
 
   it("+++Chain tests +++ has a chain", () => {
     const res = testingChain(testArray2);
-    expect(res[0].testResult).toBe("Chain");
-    expect(res[1].testResult).toBe("Chain");
+    expect(res[0].testResult).toBe("chain");
+    expect(res[1].testResult).toBe("chain");
   });
 
   it("+++Chain tests +++ one chain and a element not a chain at the start", () => {
     const res = testingChain(testArray3);
-    expect(res[0].testResult).toBe("Chain");
-    expect(res[1].testResult).toBe("Chain");
+    expect(res[0].testResult).toBe("chain");
+    expect(res[1].testResult).toBe("chain");
     expect(res[2].testResult).toBe("");
   });
 
   it("+++Chain tests +++ no duplicates with duplicate domains, and ranges", () => {
     const res = testingChain(testArray4);
-    expect(res[0].testResult).toBe("Chain");
+    expect(res[0].testResult).toBe("chain");
     expect(res[1].testResult).toBe("");
     expect(res[2].testResult).toBe("");
     expect(res[3].testResult).toBe("");
     expect(res[4].testResult).toBe("");
-    expect(res[5].testResult).toBe("Chain");
+    expect(res[5].testResult).toBe("chain");
   });
 
   it("+++Chain tests +++ with a Cycle", () => {
@@ -54,8 +54,8 @@ describe(">>>testingChain +++", () => {
     expect(res[2].testResult).toBe("");
     expect(res[3].testResult).toBe("");
     expect(res[4].testResult).toBe("");
-    expect(res[5].testResult).toBe("Chain");
-    expect(res[5].testResult).toBe("Chain");
+    expect(res[5].testResult).toBe("chain");
+    expect(res[5].testResult).toBe("chain");
   });
 });
 
