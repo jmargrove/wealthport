@@ -44,8 +44,17 @@ const reducer = (state = defaultState, action) => {
     };
   }
   case types.CHANGE_VIEW_ITEM: {
+    const resetTestValues = state.dictionaries[
+        state.viewDictionary
+      ].map(el => {
+        el.testResult = "";
+        return el;
+      });
+
     return {
       ...state,
+      dictionaries: { ...state.dictionaries },
+      [state.viewDictionary]: [...resetTestValues],
       testType: "",
       viewDictionary: action.viewDictionary
     };
