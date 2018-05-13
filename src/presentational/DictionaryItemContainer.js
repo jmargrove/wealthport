@@ -34,8 +34,8 @@ class DictionaryItemContainer extends Component {
         onMouseOut={() => this.setState({ width: "200px", height: "80px" })}
         onMouseOver={() => this.setState({ width: "205px", height: "85px" })}
         style={{
-          width: this.state.width,
-          height: this.state.height,
+          width: viewingDictionary ? "205px" : this.state.width,
+          height: viewingDictionary ? "85px" : this.state.height,
           backgroundColor: viewingDictionary ? "#40a065" : null
         }}
       >
