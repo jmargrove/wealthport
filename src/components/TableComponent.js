@@ -5,6 +5,8 @@ import styled from "styled-components";
 import TableElementComponent from "./TableElementComponent.js";
 import { deleteRow } from "./../actions/actions.js";
 
+//description: main structure of the table bounds and header/col titles
+
 const TableBounds = styled.div`
   width: 500px;
   height: 482px;
@@ -40,7 +42,6 @@ class TableComponent extends Component {
   render () {
     const data = this.props.data[this.props.viewDictionary];
     const numberOfElements = Array.apply(null, { length: 14 });
-
     return (
       <TableBounds>
         <table>

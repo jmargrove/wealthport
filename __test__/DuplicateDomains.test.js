@@ -1,4 +1,4 @@
-import { testingDuplicateDomains } from "./../src/functions.js";
+import { testingDuplicateDomains } from "./../src/functions/functions.js";
 import {
   testArray1,
   testArray2,

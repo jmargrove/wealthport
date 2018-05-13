@@ -1,24 +1,17 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import DeleteForeverIcon from "mdi-react/DeleteForeverIcon";
-import { editRow } from "./../actions/actions.js";
-import { deleteRow } from "./../actions/actions.js";
-import { testDuplicateRows } from "./../actions/actions.js";
-import { testDuplicateDomains } from "./../actions/actions.js";
-import { testCycles } from "./../actions/actions.js";
-import { testChain } from "./../actions/actions.js";
-import { ClickBox } from "./../presentational/Containers.js";
+import {
+  editRow,
+  deleteRow,
+  testDuplicateRows,
+  testDuplicateDomains,
+  testCycles,
+  testChain
+} from "./../actions/actions.js";
+import ToggleTableInput from "./../presentational/ToggleTableInput.js";
 
-const DelBox = ClickBox.extend`
-  background-color: #40a065;
-  margin-left: 25px;
-  &:hover {
-    background-color: #db5461;
-  }
-`;
-
-const TableElementComtainer = styled.td`
+const TableElementContainer = styled.td`
   height: 30px;
   background-color: white;
   box-shadow: 2px 2px 5px 0 grey;
@@ -28,20 +21,8 @@ const TableElementComtainer = styled.td`
   }
 `;
 
-const InputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  position: relative;
-  width: 235px;
-  height: 28px;
-  margin-left: 10px;
-`;
-
-const TableText = styled.p`
-  margin-left: 10px;
-  font-size: 15px;
-  max-width: 230px;
-`;
+//description: elements in table, tests on edit or delete to update elements
+//with correct data
 
 const mapDispatchToProps = dispatch => ({
   editRow: obj => dispatch(editRow(obj)),
@@ -113,11 +94,11 @@ class TableElement extends Component {
       this.props.testDuplicateDomains(dispatchObj);
       break;
     }
-    case "Cycle": {
+    case "cycle": {
       this.props.testCycles(dispatchObj);
       break;
     }
-    case "Chain": {
+    case "chain": {
       this.props.testChain(dispatchObj);
       break;
     }
@@ -126,11 +107,11 @@ class TableElement extends Component {
     }
   };
 
-  handleKeyPress = (e, testType) => {
-    if (e.key === "Enter") {
+  handleEdit = (testType, input = "", inputType, ekey) => {
+    if (ekey === "Enter") {
       this.props.editRow({
-        domain: this.inputDomain ? this.inputDomain.value : "",
-        range: this.inputRange ? this.inputRange.value : "",
+        domain: inputType === "inputDomain" ? input : "",
+        range: inputType === "inputRange" ? input : "",
         dictionary: this.state.dictionary,
         i: this.state.i
       });
@@ -140,23 +121,6 @@ class TableElement extends Component {
         focusRight: false
       });
       this.whichTestToDispatch(testType, this.state.dictionary);
-    }
-  };
-
-  handleEdit = testType => {
-    if (this.inputDomain && this.inputRange) {
-      this.whichTestToDispatch(testType, this.state.dictionary);
-      this.props.editRow({
-        domain: this.inputDomain.value,
-        range: this.inputRange.value,
-        dictionary: this.state.dictionary,
-        i: this.state.i
-      });
-      this.setState({
-        toggleInput: false,
-        focusLeft: false,
-        focusRight: false
-      });
     }
   };
 
@@ -168,37 +132,6 @@ class TableElement extends Component {
     this.whichTestToDispatch(testType, this.state.dictionary);
   };
 
-  toggleInput = (
-    value, // elementValue in table
-    focus, // focus to edit
-    input, // inputDomain or inputRange
-    deleteRowButton // show deleteRowButton
-  ) => {
-    return !this.state.toggleInput ? (
-      <TableText>{value}</TableText>
-    ) : (
-      <InputContainer>
-        <input
-          className="InputElement"
-          ref={el => (this[input] = el)}
-          onKeyPress={e => this.handleKeyPress(e, this.state.testResult)}
-          onBlur={this.handleEdit}
-          autoFocus={focus}
-          placeholder={value}
-        />
-        {deleteRowButton ? (
-          <DelBox
-            style={{ marginRight: "5px" }}
-            onMouseDown={() =>
-              this.handleDeleteRowAction(this.state.testResult)}
-          >
-            <DeleteForeverIcon />
-          </DelBox>
-        ) : null}
-      </InputContainer>
-    );
-  };
-
   render () {
     const elementDomain = this.state.domain;
     const elementRange = this.state.range;
@@ -208,7 +141,7 @@ class TableElement extends Component {
     return (
       <tbody>
         <tr>
-          <TableElementComtainer
+          <TableElementContainer
             style={{
               backgroundColor: backColor
             }}
@@ -218,14 +151,18 @@ class TableElement extends Component {
                 focusLeft: true
               })}
           >
-            {this.toggleInput(
-              elementDomain,
-              this.state.focusLeft,
-              "inputDomain",
-              false
-            )}
-          </TableElementComtainer>
-          <TableElementComtainer
+            <ToggleTableInput
+              value={elementDomain}
+              focus={this.state.focusLeft}
+              input="inputDomain"
+              deleteRowButton={false}
+              handleDeleteRowAction={this.handleDeleteRowAction}
+              handleEdit={this.handleEdit}
+              toggleInput={this.state.toggleInput}
+              testResult={this.state.testResult}
+            />
+          </TableElementContainer>
+          <TableElementContainer
             style={{
               backgroundColor: backColor
             }}
@@ -235,13 +172,17 @@ class TableElement extends Component {
                 focusRight: true
               })}
           >
-            {this.toggleInput(
-              elementRange,
-              this.state.focusRight,
-              "inputRange",
-              true
-            )}
-          </TableElementComtainer>
+            <ToggleTableInput
+              value={elementRange}
+              focus={this.state.focusRight}
+              input="inputRange"
+              deleteRowButton={true}
+              handleDeleteRowAction={this.handleDeleteRowAction}
+              handleEdit={this.handleEdit}
+              toggleInput={this.state.toggleInput}
+              testResult={this.state.testResult}
+            />
+          </TableElementContainer>
         </tr>
       </tbody>
     );

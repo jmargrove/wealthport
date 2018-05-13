@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+// Styled components that have been used in more than one component
+
 export const ClickBox = styled.div`
   width: 20px;
   height: 20px;
