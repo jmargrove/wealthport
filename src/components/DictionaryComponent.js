@@ -5,26 +5,17 @@ import { changeViewDictionary } from "./../actions/actions.js";
 import { deleteDictionary } from "./../actions/actions.js";
 import DeleteForeverIcon from "mdi-react/DeleteForeverIcon";
 import { DelBox } from "./../presentational/Containers.js";
-
+import DictionaryItemContainer from "./../presentational/DictionaryItemContainer.js";
 //description: list items of dictionaries, with delete icon.
 
-const ItemContainer = styled.div`
-  padding-top: 5px;
+const ElementContainer = styled.div`
   display: flex;
-  margin: 20px;
-  height: 75px;
-  max-width: 260px;
-  background-color: white;
-  border: solid;
-  border-color: black;
-  border-radius: 3px;
-  cursor: pointer;
-  border-width: thin;
-  box-shadow: 1px 1px 5px 0 grey;
-  &:hover {
-    background-color: #8bbf9f;
-    box-shadow: 2px 2px 10px 0 grey;
-  }
+  justify-content: center;
+  align-items: center;
+  margin: 2px;
+  margin-left: 10px;
+  height: 90px;
+  width: 220px;
 `;
 
 const ItemName = styled.p`
@@ -49,33 +40,36 @@ class DictionaryComponent extends Component {
     const array = Object.getOwnPropertyNames(this.props.dictionaries);
     return array.reverse().map((el, i) => {
       return (
-        <ItemContainer
-          key={i}
-          style={{
-            backgroundColor: el === this.props.viewDictionary ? "#40a065" : null
-          }}
-        >
-          <div
-            style={{
-              flex: 1
-            }}
+        <ElementContainer key={i + el}>
+          <DictionaryItemContainer
+            el={el}
+            viewDictionary={this.props.viewDictionary}
           >
-            <DelBox onClick={() => this.props.deleteDictionary(el)}>
-              <DeleteForeverIcon />
-            </DelBox>
-          </div>
-          <div
-            onClick={() => this.props.changeViewDictionary(el)}
-            style={{
-              flex: 6,
-              display: "Flex",
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            <ItemName>{el}</ItemName>
-          </div>
-        </ItemContainer>
+            <div
+              style={{
+                flex: 1
+              }}
+            >
+              <DelBox
+                style={{ margin: "5px" }}
+                onClick={() => this.props.deleteDictionary(el)}
+              >
+                <DeleteForeverIcon />
+              </DelBox>
+            </div>
+            <div
+              onClick={() => this.props.changeViewDictionary(el)}
+              style={{
+                flex: 6,
+                display: "Flex",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              <ItemName>{el}</ItemName>
+            </div>
+          </DictionaryItemContainer>
+        </ElementContainer>
       );
     });
   };
